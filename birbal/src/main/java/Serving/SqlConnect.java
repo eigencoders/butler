@@ -19,10 +19,6 @@ public class SqlConnect {
             System.out.println("Database connected!");
             stmt = conn.createStatement();
             rs = stmt.executeQuery("show databases;");
-            rs = stmt.executeQuery("use javadb;");
-            rs = stmt.executeQuery("desc taskTable;");
-            System.out.println(rs);
-
 
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
