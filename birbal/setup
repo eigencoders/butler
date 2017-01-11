@@ -1,0 +1,9 @@
+1. Setup Mysql for first time, and connect with Java.
+http://stackoverflow.com/questions/2839321/connect-java-to-a-mysql-database#2840358
+
+2. Purge mysql to reinstall.
+https://www.cyberciti.biz/faq/uninstall-mysql-ubuntu-linux-command/
+
+3. Credentials :
+User/Pwd : java
+Database : javadb
