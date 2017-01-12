@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,4 +15,8 @@ import lombok.Setter;
 public class TimePeriod {
     private Long startTime;
     private Long endTime;
+
+    public boolean contains(Long time) {
+        return time>=startTime && time<=endTime;
+    }
 }

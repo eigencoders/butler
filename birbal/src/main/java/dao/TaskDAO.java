@@ -1,6 +1,6 @@
 package dao;
 
-import Entities.Task;
+import entities.Task;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 

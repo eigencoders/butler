@@ -1,6 +1,6 @@
-package Serving;
+package serving;
 
-import Entities.Task;
+import entities.Task;
 import dao.TaskDAO;
 import org.skife.jdbi.v2.DBI;
 
