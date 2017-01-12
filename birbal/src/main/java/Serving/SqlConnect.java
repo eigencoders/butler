@@ -1,39 +1,36 @@
 package Serving;
 
-import java.sql.*;
+import Entities.Task;
+import dao.TaskDAO;
+import org.skife.jdbi.v2.DBI;
+
+import java.util.List;
+
 
 /**
  * Created by shreenath on 11/1/17.
  */
 public class SqlConnect {
     public static void main(String args[]){
-        String url = "jdbc:mysql://localhost:3306/javadb";
-        String username = "java";
-        String password = "java";
-        loadDriver();
-        System.out.println("Connecting database...");
-        Statement stmt;
-        ResultSet rs;
-        try{
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery("show databases;");
-
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+        DBI dbi = getDBI();
+        TaskDAO taskDAO = dbi.open(TaskDAO.class);
+//        taskDAO.dropTable();
+//        taskDAO.createTable();
+//        List<Task> allTasks = taskDAO.getAllTasks();
+//        List<Task> allTasks = taskDAO.getFutureTasks();
+//        List<Task> allTasks = taskDAO.getTemporallyEligibleTasks((long)250);
+        List<Task> allTasks = taskDAO.getSpatiallyEligibleTasks("%OTHER%");
+        System.out.println(allTasks.size());
+        for (Task task : allTasks) {
+            System.out.println(task.toString());
         }
+
     }
 
-    static void loadDriver() {
-        System.out.println("Loading driver...");
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("Driver loaded!");
-        } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Cannot find the driver in the classpath!", e);
-        }
-
+    public static DBI getDBI() {
+        String dbURl = "jdbc:mysql://localhost:3306/javadb";
+        String username = "java";
+        String password = "java";
+        return new DBI(dbURl, username, password);
     }
 }

@@ -5,5 +5,6 @@ package Entities;
  */
 public enum Status {
     EXPIRED,
-    INPROGRESS
+    INPROGRESS,
+    FUTURE
 }
