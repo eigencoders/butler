@@ -13,6 +13,7 @@ public class ComputeConstants {
     public static final String TKEY = "time";
     public static final String UKEY = "urgency";
     public static final String IKEY = "inherent";
+    public static final String DKEY = "dependency";
 
     public static final long ONE_HOUR_MS = 3600000;
     public static final long TWO_HOUR_MS = 2*ONE_HOUR_MS;

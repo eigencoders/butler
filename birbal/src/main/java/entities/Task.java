@@ -3,7 +3,6 @@ package entities;
 import constants.ComputeConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
@@ -18,7 +17,6 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Task {
     private String name;
     private String taskId;
@@ -41,6 +39,22 @@ public class Task {
                 frequency + "-" +
                 deadline + "-" +
                 spatialAffinity;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task that = (Task) other;
+        return this.taskId.equals(that.taskId);
+    }
+
+    public Task(String taskId) {
+        //#HACK Only to be used for comparing tasks having just an Id.
+        this.taskId = taskId;
+//        return this(null,taskId,null,null,null,null,null,null,null, null);
     }
 
 
