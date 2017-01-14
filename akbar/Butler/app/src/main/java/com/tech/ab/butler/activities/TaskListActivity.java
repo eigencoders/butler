@@ -1,4 +1,4 @@
-package com.tech.ab.butler;
+package com.tech.ab.butler.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.tech.ab.butler.R;
 
 public class TaskListActivity extends AppCompatActivity {
 
