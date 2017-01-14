@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by shreenath on 11/1/17.
  */
-public class SqlConnect {
+public class DBConnect {
     public static void main(String args[]){
         DBI dbi = getDBI();
         TaskDAO taskDAO = dbi.open(TaskDAO.class);

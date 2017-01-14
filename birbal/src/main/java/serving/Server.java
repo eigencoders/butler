@@ -36,7 +36,7 @@ public class Server {
     }
 
     private static Map<Task, Double> getResponseFor(Request request) {
-        DBI dbi = SqlConnect.getDBI();
+        DBI dbi = DBConnect.getDBI();
         TaskDAO taskDAO = dbi.open(TaskDAO.class);
         List<Task> availableTasks = taskDAO.getFutureTasks();
 
