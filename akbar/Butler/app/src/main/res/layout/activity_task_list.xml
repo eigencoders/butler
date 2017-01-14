@@ -23,12 +23,76 @@
 
     <include layout="@layout/content_task_list" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+
+    <LinearLayout
+        android:id="@+id/fabRoutineLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_marginBottom="@dimen/standard_100"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center|left"
+            android:text="Set Routine"
+            android:padding="@dimen/standard_5"
+            android:id="@+id/textView" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabRoutine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:srcCompat="@android:drawable/ic_menu_recent_history"
+            app:fabSize="auto"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_gravity="bottom|end">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_menu_view" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fabIncidentalsLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/standard_180"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_gravity="bottom|end"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Set an Incidental Task"
+            android:gravity="center|left"
+            android:padding="@dimen/standard_5"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabIncidentals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:srcCompat="@android:drawable/ic_menu_today"
+            app:fabSize="auto"/>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
