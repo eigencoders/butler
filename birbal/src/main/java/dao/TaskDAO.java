@@ -11,7 +11,7 @@ import java.util.List;
  */
 @RegisterMapper(Task.TaskMapper.class)
 public interface TaskDAO {
-    String tableName = "taskTable";
+    String tableName = "taskTable1";
 
     @SqlQuery("select * from " + tableName )
     List<Task> getAllTasks();
@@ -19,31 +19,31 @@ public interface TaskDAO {
     @SqlQuery("select * from " + tableName + " where status = 'FUTURE' ")
     List<Task> getFutureTasks();
 
-    @SqlQuery("select * from " + tableName + " where status != 'EXPIRED' and startTime <= :timeStamp and endTime > :timeStamp")
+    @SqlQuery("select * from " + tableName + " where status != 'EXPIRED' and startTimeOfTheDay <= :timeStamp and endTimeOfTheDay > :timeStamp")
     List<Task> getTemporallyEligibleTasks(@Bind("timeStamp")Long timeStamp);
 
     @SqlQuery("select * from " + tableName + " where status != 'EXPIRED' and places LIKE :place ")
     List<Task> getSpatiallyEligibleTasks(@Bind("place") String place);
 
-    @SqlQuery("select * from " + tableName + " where status != 'EXPIRED' and places LIKE :place and startTime <= :timeStamp and endTime > :timeStamp ")
+    @SqlQuery("select * from " + tableName + " where status != 'EXPIRED' and places LIKE :place and startTimeOfTheDay <= :timeStamp and endTimeOfTheDay > :timeStamp ")
     List<Task> getSpatioTemporallyEligibleTasks(@Bind("place") String place, @Bind("timeStamp")Long timeStamp);
 
 
-    @SqlUpdate("CREATE TABLE IF NOT EXISTS "+tableName+" (" +
-            "  `name` varchar(255) NOT NULL," +
+    @SqlUpdate("CREATE TABLE " + tableName +" (" +
+            "  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL," +
             "  `taskId` mediumint(9) unsigned NOT NULL AUTO_INCREMENT," +
             "  `dependentTaskId` mediumint(9) unsigned DEFAULT '0'," +
-            "  `duration` double DEFAULT '0'," +
-            "  `status` enum('ACTIVE','EXPIRED','FUTURE') NOT NULL DEFAULT 'FUTURE'," +
+            "  `durationMins` double DEFAULT '0'," +
+            "  `status` enum('ACTIVE','EXPIRED','FUTURE') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'FUTURE'," +
             "  `staticScore` double DEFAULT '0'," +
             "  `frequency` double DEFAULT '0'," +
-            "  `deadline` mediumint(9) unsigned DEFAULT '0'," +
-            "  `startTime` mediumint(9) unsigned DEFAULT '0'," +
-            "  `endTime` mediumint(9) unsigned DEFAULT '0'," +
-            "  `places` varchar(255) NOT NULL DEFAULT 'OTHER'," +
+            "  `deadline` DATETIME DEFAULT '2066-01-01 00:00:00'," +
+            "  `startTimeOfTheDay` TIME DEFAULT '00:00:00'," +
+            "  `endTimeOfTheDay` Time DEFAULT '23:59:59'," +
+            "  `places` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'OTHER'," +
             "  PRIMARY KEY (`taskId`)," +
             "  UNIQUE KEY `id_UNIQUE` (`taskId`)" +
-            ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;")
+            ") ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;")
     void createTable();
 
 

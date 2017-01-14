@@ -4,6 +4,7 @@ import entities.Task;
 import dao.TaskDAO;
 import org.skife.jdbi.v2.DBI;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -17,13 +18,11 @@ public class SqlConnect {
 //        taskDAO.dropTable();
 //        taskDAO.createTable();
 //        List<Task> allTasks = taskDAO.getAllTasks();
-//        List<Task> allTasks = taskDAO.getFutureTasks();
+        List<Task> allTasks = taskDAO.getFutureTasks();
 //        List<Task> allTasks = taskDAO.getTemporallyEligibleTasks((long)250);
-        List<Task> allTasks = taskDAO.getSpatiallyEligibleTasks("%OTHER%");
-        System.out.println(allTasks.size());
-        for (Task task : allTasks) {
-            System.out.println(task.toString());
-        }
+//        List<Task> allTasks = taskDAO.getSpatiallyEligibleTasks("%OTHER%");
+
+        System.out.println(Arrays.toString(allTasks.toArray()));
 
     }
 

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Time;
+
 /**
  * Created by shreenath on 11/1/17.
  */
@@ -13,10 +15,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TimePeriod {
-    private Long startTime;
-    private Long endTime;
+    private Time startTimeOfTheDay;
+    private Time endTimeOfTheDay;
 
-    public boolean contains(Long time) {
-        return time>=startTime && time<=endTime;
+    public boolean contains(Time currentTime) {
+        return currentTime.after(startTimeOfTheDay) && currentTime.before(endTimeOfTheDay);
     }
 }
