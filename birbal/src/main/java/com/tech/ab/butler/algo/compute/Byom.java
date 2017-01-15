@@ -6,7 +6,7 @@ import com.tech.ab.butler.algo.entities.Request;
 import com.tech.ab.butler.algo.entities.Task;
 import lombok.AllArgsConstructor;
 
-import java.sql.Time;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 public class Byom {
     private ComputeWeights weightsMap;
 
-    public Map<Task, Double> getScoresMap(List<Task> applicableTasks, Request request) {
+    public Map<Task, Double> getScoresMap(List<Task> applicableTasks, Request request) throws ParseException {
         Map<Task, Double> scores = new HashMap<Task, Double>();
         for (Task task: applicableTasks) {
             scores.put(task, computeScore(task, request, applicableTasks));
@@ -26,7 +26,7 @@ public class Byom {
         return scores;
     }
 
-    private double computeScore(Task t, Request r, List<Task> applicableTasks) {
+    private double computeScore(Task t, Request r, List<Task> applicableTasks) throws ParseException {
         Map<String, Double> scoreMap = new HashMap<String, Double>();
         scoreMap.put(ComputeConstants.PKEY,calculateSpatialPoints(t,r));
         scoreMap.put(ComputeConstants.TKEY,calculateTemporalPoints(t,r));
@@ -48,8 +48,8 @@ public class Byom {
         return weightsMap.spatialWeights[2];
     }
 
-    private double calculateTemporalPoints(Task t, Request r){
-        if(t.getTemporalAffinity().contains(new Time(r.getRequestTime().getTime())))
+    private double calculateTemporalPoints(Task t, Request r) throws ParseException {
+        if(t.getTemporalAffinity().contains(r.getRequestTime()))
             return weightsMap.temporalWeights.getYes();
         return weightsMap.temporalWeights.getNo();
     }

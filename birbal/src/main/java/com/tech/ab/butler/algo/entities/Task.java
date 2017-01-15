@@ -10,7 +10,6 @@ import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -55,11 +54,7 @@ public class Task {
         @Override
         public Task map(int i, ResultSet r, StatementContext sc) throws SQLException {
             TimePeriod timePeriod = null;
-            try {
-                timePeriod = new TimePeriod(ComputeConstants.timeFormat.parse(r.getString("startTimeOfTheDay")), ComputeConstants.timeFormat.parse(r.getString("endTimeOfTheDay")));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            timePeriod = new TimePeriod(r.getString("startTimeOfTheDay"), r.getString("endTimeOfTheDay"));
             return new Task(r.getString("name"),
                     r.getString("taskId"),
                     r.getString("dependentTaskId"),
