@@ -8,11 +8,12 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public class ComputeWeights {
-    WeightPair spatialWeights;
+    Double[] spatialWeights;
     WeightPair temporalWeights;
     Double[] urgencyWeights;
     double inherentScoreWeight;
     double dependencyPenalty;
+    double deadlineMissPenalty;
 //    WeightPair spatialWeights;
 //    WeightPair spatialWeights;
     

@@ -6,14 +6,15 @@ import com.tech.ab.butler.algo.entities.WeightPair;
  * Created by shreenath on 15/1/17.
  */
 public class ComputeWeightsBuilder {
-    WeightPair spatialWeights;
+    Double[] spatialWeights;
     WeightPair temporalWeights;
     Double[] urgencyWeights;
     Double inherentScoreWeight;
     Double dependencyPenalty;
+    Double deadlineMissPenalty;
 
-    public ComputeWeightsBuilder withSpatialWeights(double yes, double no) {
-        this.spatialWeights = new WeightPair(yes, no);
+    public ComputeWeightsBuilder withSpatialWeights(Double[] array) {
+        this.spatialWeights = array;
         return this;
     }
 
@@ -37,8 +38,13 @@ public class ComputeWeightsBuilder {
         return this;
     }
 
+    public ComputeWeightsBuilder withDeadlineMissPenalty(double w) {
+        this.deadlineMissPenalty= w;
+        return this;
+    }
+
     public ComputeWeights build() {
-        return new ComputeWeights(spatialWeights, temporalWeights, urgencyWeights, inherentScoreWeight, dependencyPenalty);
+        return new ComputeWeights(spatialWeights, temporalWeights, urgencyWeights, inherentScoreWeight, dependencyPenalty, deadlineMissPenalty);
     }
 
 }

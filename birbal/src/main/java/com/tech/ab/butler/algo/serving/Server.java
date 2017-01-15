@@ -11,9 +11,7 @@ import org.skife.jdbi.v2.DBI;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shreenath on 12/1/17.
@@ -24,14 +22,16 @@ public class Server {
         Date d = ComputeConstants.format.parse("01/01/2017 00:00:00");
         String p = "OFFICE";
         System.out.println(String.format("Request is for : %s,%s",d,p));
-        return new Request(new Timestamp(d.getTime()),'%'+p+'%');
+        return new Request(new Timestamp(d.getTime()),p);
     }
 
     public static void main(String args[]) throws ParseException {
         Request request = prepareRequest();
         Map<Task, Double> response = getResponseFor(request);
         System.out.println("Got Scores :");
-        for (Map.Entry<Task, Double> entry: response.entrySet()) {
+        Map<Task, Double> sortedMap = sortByValue(response);
+
+        for (Map.Entry<Task, Double> entry: sortedMap.entrySet()) {
             System.out.println(entry.getValue()+"="+entry.getKey());
         }
     }
@@ -46,13 +46,32 @@ public class Server {
 
     private static Byom instantiateSatyanveshi() {
         ComputeWeights weights = new ComputeWeightsBuilder()
-                .withSpatialWeights(10, -10)
+                .withSpatialWeights(new Double[]{10.0, 5.0, 0.0})
                 .withDependencyPenalty(10)
-                .withTemporalWeights(10,-10)
+                .withTemporalWeights(10, 0)
                 .withInherentScoreWeight(10)
                 .withUrgencyWeights(new Double[]{100.0,80.0,60.0,40.0,20.0,10.0})
+                .withDeadlineMissPenalty(40)
                 .build();
 
         return new Byom(weights);
+    }
+
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue( Map<K, V> map ) {
+        List<Map.Entry<K, V>> list =
+                new LinkedList<>( map.entrySet() );
+        Collections.sort( list, new Comparator<Map.Entry<K, V>>() {
+            @Override
+            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
+                return (o2.getValue()).compareTo(o1.getValue());
+            }
+        });
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put( entry.getKey(), entry.getValue() );
+        }
+        return result;
     }
 }

@@ -1,9 +1,7 @@
 package com.tech.ab.butler.algo.entities;
 
 import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -16,6 +14,7 @@ import java.sql.Timestamp;
  */
 @Getter
 @Setter
+@ToString(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
 @AllArgsConstructor
 public class Task {
     private String name;
@@ -29,17 +28,6 @@ public class Task {
     private TimePeriod temporalAffinity;
     private String spatialAffinity;
 
-    public String toString() {
-        return name + "-" +
-                taskId + "-" +
-                dependentTaskId + "-" +
-                duration + "-" +
-                status + "-" +
-                staticScore + "-" +
-                frequency + "-" +
-                deadline + "-" +
-                spatialAffinity;
-    }
 
     @Override
     public boolean equals(Object other) {

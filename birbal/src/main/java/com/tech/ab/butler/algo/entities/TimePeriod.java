@@ -1,9 +1,6 @@
 package com.tech.ab.butler.algo.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Time;
 
@@ -14,6 +11,7 @@ import java.sql.Time;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class TimePeriod {
     private Time startTimeOfTheDay;
     private Time endTimeOfTheDay;

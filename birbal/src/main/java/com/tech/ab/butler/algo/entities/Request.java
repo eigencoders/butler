@@ -1,6 +1,7 @@
 package com.tech.ab.butler.algo.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 
 import java.sql.Timestamp;
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
  */
 @AllArgsConstructor
 @Getter
+@Data
 public class Request {
     private Timestamp requestTime;
     private String place;
