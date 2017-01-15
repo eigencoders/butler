@@ -1,11 +1,11 @@
 package com.tech.ab.butler.algo.entities;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Timestamp;
+import lombok.ToString;
 
 /**
  * Created by shreenath on 11/1/17.
@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor(suppressConstructorProperties = true)
 @Getter
 @Setter
-@NoArgsConstructor
+@ToString(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
 public class Task {
     private String name;
     private String taskId;
@@ -26,17 +26,6 @@ public class Task {
     private TimePeriod temporalAffinity;
     private String spatialAffinity;
 
-    public String toString() {
-        return name + "-" +
-                taskId + "-" +
-                dependentTaskId + "-" +
-                duration + "-" +
-                status + "-" +
-                staticScore + "-" +
-                frequency + "-" +
-                deadline + "-" +
-                spatialAffinity;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -54,4 +43,23 @@ public class Task {
 //        return this(null,taskId,null,null,null,null,null,null,null, null);
     }
 
+
+//    public static class TaskMapper implements ResultSetMapper<Task> {
+//
+//        @Override
+//        public Task map(int i, ResultSet r, StatementContext sc) throws SQLException {
+//            TimePeriod timePeriod = new TimePeriod(r.getTime("startTimeOfTheDay"), r.getTime("endTimeOfTheDay"));
+//            return new Task(r.getString("name"),
+//                    r.getString("taskId"),
+//                    r.getString("dependentTaskId"),
+//                    r.getLong("durationMins")* ComputeConstants.MINS_2_MS,
+//                    Status.valueOf(r.getString("status")),
+//                    r.getLong("staticScore"),
+//                    r.getInt("frequency"),
+//                    r.getTimestamp("deadline"),
+//                    timePeriod,
+//                    r.getString("places")
+//                    );
+//        }
+//    }
 }

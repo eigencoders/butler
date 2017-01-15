@@ -7,5 +7,6 @@ public enum Place {
     HOME,
     OFFICE,
     MARKET,
-    OTHER
+    OTHER,
+    ANY
 }

@@ -1,10 +1,9 @@
-package com.tech.ab.butler.algo.serving;
+package com.tech.ab.butler.algo.compute;
 
-import com.tech.ab.butler.algo.compute.ComputeWeights;
-import com.tech.ab.butler.algo.constants.ComputeConstants;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+import com.tech.ab.butler.algo.entities.Place;
 import com.tech.ab.butler.algo.entities.Request;
 import com.tech.ab.butler.algo.entities.Task;
-
 import lombok.AllArgsConstructor;
 
 import java.sql.Time;
@@ -15,7 +14,7 @@ import java.util.Map;
 /**
  * Created by shreenath on 13/1/17.
  */
-@AllArgsConstructor(suppressConstructorProperties = true)
+@AllArgsConstructor
 public class Byom {
     private ComputeWeights weightsMap;
 
@@ -34,6 +33,7 @@ public class Byom {
         scoreMap.put(ComputeConstants.UKEY,calculateUrgencyPoints(t,r));
         scoreMap.put(ComputeConstants.IKEY,calculateStaticScorePoints(t));
         scoreMap.put(ComputeConstants.DKEY,calculateDependencyPenalty(t,applicableTasks));
+        scoreMap.put(ComputeConstants.DMKEY, calculateDeadlineMissPenalty(t,r));
 
         double score = 0.0;
         for (Map.Entry<String, Double> entry :scoreMap.entrySet()) score = score + entry.getValue();
@@ -42,8 +42,10 @@ public class Byom {
 
     private double calculateSpatialPoints(Task t, Request r){
         if(t.getSpatialAffinity().contains(r.getPlace()))
-            return weightsMap.spatialWeights.getYes();
-        return weightsMap.spatialWeights.getNo();
+            return weightsMap.spatialWeights[0];
+        else if (t.getSpatialAffinity().equalsIgnoreCase(Place.ANY.toString()))
+            return weightsMap.spatialWeights[1];
+        return weightsMap.spatialWeights[2];
     }
 
     private double calculateTemporalPoints(Task t, Request r){
@@ -72,6 +74,10 @@ public class Byom {
 
     private double calculateDependencyPenalty(Task t, List<Task> allTasks) {
         return allTasks.contains(new Task(t.getDependentTaskId()))? -weightsMap.dependencyPenalty : 0.0;
+    }
+
+    private double calculateDeadlineMissPenalty(Task t, Request r) {
+        return (r.getRequestTime().after(t.getDeadline())) ? -weightsMap.deadlineMissPenalty : 0.0;
     }
 
 }
