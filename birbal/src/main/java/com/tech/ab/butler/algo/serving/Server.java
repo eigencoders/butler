@@ -19,7 +19,7 @@ import java.util.*;
 public class Server {
 
     private static Request prepareRequest() throws ParseException {
-        Date d = ComputeConstants.format.parse("01/01/2017 00:00:00");
+        Date d = ComputeConstants.format.parse("15/01/2017 00:00:00");
         String p = "OFFICE";
         System.out.println(String.format("Request is for : %s,%s",d,p));
         return new Request(new Timestamp(d.getTime()),p);
