@@ -66,4 +66,8 @@
         <item>@string/slot8</item>
     </string-array>
 
+    <string name="title_activity_where_are_you">Butler</string>
+    <string name="btEnter">Enter Place</string>
+    <string name="compute_content">Where are you right Now?</string>
+
 </resources>

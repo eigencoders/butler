@@ -6,4 +6,6 @@
     <color name="colorPrimaryLight">#6578f2</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

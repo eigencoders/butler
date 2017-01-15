@@ -45,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        etAddPlaces.setText(userInput.getText());
+                                        etAddPlaces.setText(etAddPlaces.getText());
                                         /*TODO-
                                           Populate a string array accordingly.
                                          */
@@ -86,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         // get user input and set it to result
                                         // edit text
-                                        etScheduleName.setText(userInput.getText());
+                                        etScheduleName.setText(etScheduleName.getText());
                                         /*TODO-
                                           Maintain a variable for this.
                                          */
