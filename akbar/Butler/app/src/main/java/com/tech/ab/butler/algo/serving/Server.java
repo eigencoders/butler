@@ -41,7 +41,7 @@ public class Server {
         }
     }
 
-    private static Map<Task, Double> getResponseFor(Request request) {
+    private static Map<Task, Double> getResponseFor(Request request) throws ParseException {
 //        DBI dbi = DBConnect.getDBI();
 //        TaskDAO taskDAO = dbi.open(TaskDAO.class);
         List<Task> availableTasks = new ArrayList<>();// taskDAO.getFutureTasks();

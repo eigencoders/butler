@@ -1,6 +1,10 @@
 package com.tech.ab.butler.algo.entities;
 
-import java.sql.Time;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +17,19 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@AllArgsConstructor
+@AllArgsConstructor(suppressConstructorProperties = true)
 @NoArgsConstructor
 @Data
 public class TimePeriod {
-    private Time startTimeOfTheDay;
-    private Time endTimeOfTheDay;
+    private String startTimeOfTheDay;
+    private String endTimeOfTheDay;
 
-    public boolean contains(Time currentTime) {
-        return currentTime.after(startTimeOfTheDay) && currentTime.before(endTimeOfTheDay);
+    public boolean contains(Timestamp currentTime) throws ParseException {
+        Date start = ComputeConstants.timeFormat.parse(startTimeOfTheDay);
+        Date end = ComputeConstants.timeFormat.parse(endTimeOfTheDay);
+        long st = start.getHours()*10000 + start.getMinutes()*100 + start.getSeconds();
+        long et = end.getHours()*10000 + end.getMinutes()*100 + end.getSeconds();
+        long ct = currentTime.getHours()*10000 + currentTime.getMinutes()*100 + currentTime.getSeconds();
+        return st<=ct && ct<et;
     }
 }
