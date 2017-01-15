@@ -1,13 +1,17 @@
 package com.tech.ab.butler.algo.entities;
 
 import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * Created by shreenath on 11/1/17.
@@ -24,7 +28,7 @@ public class Task {
     private Status status;
     private Long staticScore;
     private Integer frequency;
-    private Timestamp deadline;
+    private Date deadline;
     private TimePeriod temporalAffinity;
     private String spatialAffinity;
 
@@ -50,7 +54,12 @@ public class Task {
 
         @Override
         public Task map(int i, ResultSet r, StatementContext sc) throws SQLException {
-            TimePeriod timePeriod = new TimePeriod(r.getTime("startTimeOfTheDay"), r.getTime("endTimeOfTheDay"));
+            TimePeriod timePeriod = null;
+            try {
+                timePeriod = new TimePeriod(ComputeConstants.timeFormat.parse(r.getString("startTimeOfTheDay")), ComputeConstants.timeFormat.parse(r.getString("endTimeOfTheDay")));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             return new Task(r.getString("name"),
                     r.getString("taskId"),
                     r.getString("dependentTaskId"),
