@@ -1,6 +1,6 @@
-package compute;
+package com.tech.ab.butler.algo.compute;
 
-import entities.WeightPair;
+import com.tech.ab.butler.algo.entities.WeightPair;
 import lombok.AllArgsConstructor;
 
 /**

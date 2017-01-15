@@ -1,6 +1,6 @@
-package dao;
+package com.tech.ab.butler.algo.dao;
 
-import entities.Task;
+import com.tech.ab.butler.algo.entities.Task;
 import org.skife.jdbi.v2.sqlobject.*;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 

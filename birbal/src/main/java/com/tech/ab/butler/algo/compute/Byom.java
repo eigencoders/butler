@@ -1,8 +1,8 @@
-package compute;
+package com.tech.ab.butler.algo.compute;
 
-import constants.ComputeConstants;
-import entities.Request;
-import entities.Task;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+import com.tech.ab.butler.algo.entities.Request;
+import com.tech.ab.butler.algo.entities.Task;
 import lombok.AllArgsConstructor;
 
 import java.sql.Time;

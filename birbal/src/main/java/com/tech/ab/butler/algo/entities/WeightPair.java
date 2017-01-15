@@ -1,4 +1,4 @@
-package entities;
+package com.tech.ab.butler.algo.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

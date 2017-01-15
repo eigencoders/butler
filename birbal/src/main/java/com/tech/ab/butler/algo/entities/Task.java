@@ -1,6 +1,6 @@
-package entities;
+package com.tech.ab.butler.algo.entities;
 
-import constants.ComputeConstants;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

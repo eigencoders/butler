@@ -1,4 +1,4 @@
-package entities;
+package com.tech.ab.butler.algo.entities;
 
 /**
  * Created by shreenath on 11/1/17.

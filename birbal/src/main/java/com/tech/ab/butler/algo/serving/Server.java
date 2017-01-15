@@ -1,17 +1,19 @@
-package serving;
+package com.tech.ab.butler.algo.serving;
 
-import compute.Byom;
-import compute.ComputeWeights;
-import compute.ComputeWeightsBuilder;
-import constants.ComputeConstants;
-import dao.TaskDAO;
-import entities.Request;
-import entities.Task;
+import com.tech.ab.butler.algo.compute.Byom;
+import com.tech.ab.butler.algo.compute.ComputeWeights;
+import com.tech.ab.butler.algo.compute.ComputeWeightsBuilder;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+import com.tech.ab.butler.algo.dao.TaskDAO;
+import com.tech.ab.butler.algo.entities.Request;
+import com.tech.ab.butler.algo.entities.Task;
 import org.skife.jdbi.v2.DBI;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by shreenath on 12/1/17.
