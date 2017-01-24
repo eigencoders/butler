@@ -23,8 +23,6 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         tvAddPlaces=(TextView)findViewById(R.id.tvAddPlaces);
         tvScheduleName=(TextView)findViewById(R.id.tvScheduleName);
-        etAddPlaces=(EditText)findViewById(R.id.etAddPlaces);
-        etScheduleName=(EditText)findViewById(R.id.etScheduleName);
 
         tvAddPlaces.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +34,7 @@ public class SettingsActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
                 alertDialogBuilder.setView(promptsView);
-                final EditText userInput = (EditText) promptsView
+                final EditText etAddPlaces = (EditText) promptsView
                         .findViewById(R.id.etAddPlaces);
                 alertDialogBuilder
                         .setCancelable(false)
@@ -77,7 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         context);
                 alertDialogBuilder.setView(promptsView);
-                final EditText userInput = (EditText) promptsView
+                final EditText etScheduleName = (EditText) promptsView
                         .findViewById(R.id.etScheduleName);
                 alertDialogBuilder
                         .setCancelable(false)

@@ -64,11 +64,8 @@
         <com.tech.ab.butler.elements.MultiSelectSpinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerPlace"
-            android:prompt="@string/placeResponse"
-            android:spinnerMode="dialog"
-            android:scrollbars="vertical"
-            android:entries="@array/placeList">
+            android:id="@+id/routineSpinnerPlace"
+            >
         </com.tech.ab.butler.elements.MultiSelectSpinner>
 
         <TextView
@@ -126,12 +123,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
+                android:id="@+id/routineDeadlineDate"
                 />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time"
+                android:id="@+id/routineDeadlineTime"
                 />
 
         </LinearLayout>

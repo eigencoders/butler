@@ -65,10 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/incidentalSpinnerPlace"
-            android:prompt="@string/placeResponse"
-            android:spinnerMode="dialog"
-            android:scrollbars="vertical"
-            android:entries="@array/placeList">
+            >
         </com.tech.ab.butler.elements.MultiSelectSpinner>
 
         <TextView
