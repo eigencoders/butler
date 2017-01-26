@@ -120,12 +120,14 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/btnDateIncidental"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
                 />
 
             <Button
+                android:id="@+id/btnTimeIncidental"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time"

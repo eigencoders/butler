@@ -123,14 +123,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/date"
-                android:id="@+id/routineDeadlineDate"
+                android:id="@+id/btnDateRoutine"
                 />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time"
-                android:id="@+id/routineDeadlineTime"
+                android:id="@+id/btnTimeRoutine"
                 />
 
         </LinearLayout>
