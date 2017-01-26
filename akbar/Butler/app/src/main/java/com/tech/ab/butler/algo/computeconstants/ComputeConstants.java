@@ -7,7 +7,8 @@ import java.text.SimpleDateFormat;
  * Created by shreenath on 13/1/17.
  */
 public class ComputeConstants {
-    public static final DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    public static final DateFormat format2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    public static final DateFormat format = new SimpleDateFormat("EEE MMM d HH:mm:ss Z yyyy");
     public static final DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
     public static final String PKEY = "place";
