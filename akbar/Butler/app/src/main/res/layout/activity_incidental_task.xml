@@ -1,14 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_incidental_task"
-    android:layout_width="match_parent"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svIncidentalTask"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/colorPrimaryLight"
-    tools:context="com.tech.ab.butler.activities.IncidentalTaskActivity">
+    android:scrollbars="vertical"
+    android:background="@color/colorPrimaryLight">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimaryLight">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/incidental"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/taskName"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <EditText
+            android:id="@+id/etIncidentalTaskName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Task Name"
+            android:inputType="textPersonName"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/frequency"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <Spinner
+            android:id="@+id/incidentalSpinnerFrequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:entries="@array/frequencyList"
+            android:prompt="@string/frequencyResponse"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/place"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <com.tech.ab.butler.elements.MultiSelectSpinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/incidentalSpinnerPlace"
+            >
+        </com.tech.ab.butler.elements.MultiSelectSpinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/priority"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <Spinner
+            android:id="@+id/incidentalSpinnerPriority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:entries="@array/priorityList"
+            android:prompt="@string/priorityResponse"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_affinity"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <Spinner
+            android:id="@+id/incidentalSpinnerTimeAffinity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:entries="@array/timeAffinityList"
+            android:prompt="@string/timeAffinityResponse"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/deadline"
+            android:textSize="@dimen/standard_23"
+            android:fontFamily="cursive"
+            android:textStyle="bold|italic"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</ScrollView>
