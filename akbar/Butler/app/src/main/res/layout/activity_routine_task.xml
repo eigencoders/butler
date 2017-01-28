@@ -13,12 +13,12 @@
         android:orientation="vertical"
         android:background="@color/colorPrimaryLight">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/routine"
-            android:layout_gravity="center"
-            />
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/routine"-->
+            <!--android:layout_gravity="center"-->
+            <!--/>-->
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -134,6 +134,12 @@
                 />
 
         </LinearLayout>
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnEnterRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter"/>
 
     </LinearLayout>
 </ScrollView>

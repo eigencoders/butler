@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,9 +12,10 @@ import lombok.ToString;
  * Created by shreenath on 11/1/17.
  */
 @AllArgsConstructor(suppressConstructorProperties = true)
+@NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
+@ToString//(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
 public class Task {
     private String name;
     private String taskId;

@@ -139,7 +139,7 @@ public class WhereAreYouActivity extends AppCompatActivity {
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.add_current_place_dialog,null);
                 final Spinner spnAddCurrentPlace = (Spinner) promptsView.findViewById(R.id.etAddCurrentPlace);
-                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, placeDynamicList);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx, R.layout.where_are_you_row_spinner, placeDynamicList);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptsView);

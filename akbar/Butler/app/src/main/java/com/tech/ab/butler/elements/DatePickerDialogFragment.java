@@ -4,34 +4,53 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.DatePicker;
 import android.support.v4.app.DialogFragment;
+import android.view.WindowManager;
+import android.widget.DatePicker;
+
 import java.util.Calendar;
 
 /**
  * Created by Ankita on 26-Jan-17.
  */
 
-public class DatePickerDialogFragment extends DialogFragment
-        implements DatePickerDialog.OnDateSetListener {
+public class DatePickerDialogFragment extends DialogFragment {
 
     private Context context;
-    private Calendar MinDate, MaxDate;
-    private DatePickerDialog.OnDateSetListener DateSetListener;
+    private Calendar minDate, maxDate;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        // Use the current date as the default date in the picker
-        final Calendar c = Calendar.getInstance();
-        int year = c.get(Calendar.YEAR);
-        int month = c.get(Calendar.MONTH);
-        int day = c.get(Calendar.DAY_OF_MONTH);
 
-        // Create a new instance of DatePickerDialog and return it
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+    public DatePickerDialogFragment() {
     }
 
-    public void onDateSet(DatePicker view, int year, int month, int day) {
-        //TODO - Do something with the date chosen
+    public DatePickerDialogFragment(DatePickerDialog.OnDateSetListener callback, Context context) {
+        mDateSetListener = callback;
+        this.context = context;
+    }
+    DatePickerDialog datePickerDialog;
+    DatePicker datePicker;
+
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Calendar cal = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(getActivity(), this.mDateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+//        datePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+//            @Override
+//            public void onShow(DialogInterface dialog) {
+//                try {
+//                    if (minDate !=null && maxDate !=null) {
+//                        ((DatePickerDialog) dialog).getDatePicker().setMaxDate(maxDate.getTimeInMillis());
+//                        ((DatePickerDialog) dialog).getDatePicker().setMinDate(minDate.getTimeInMillis());
+//
+//                    }
+//                } catch (NullPointerException e) {
+//                    dialog.dismiss();
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        return datePickerDialog;
     }
 }
