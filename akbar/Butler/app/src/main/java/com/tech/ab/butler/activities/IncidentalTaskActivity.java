@@ -30,12 +30,11 @@ import com.tech.ab.butler.elements.TimePickerDialogFragment;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.tech.ab.butler.algo.computeconstants.ComputeConstants.freqStringToInt;
 import static com.tech.ab.butler.algo.computeconstants.ComputeConstants.getTimeAffinityFromId;
 
 public class IncidentalTaskActivity extends AppCompatActivity {
 
-    Spinner incidentalFrequencySpinner,incidentalPrioritySpinner, incidentalTimeAffinitySpinner;
+    Spinner incidentalPrioritySpinner, incidentalTimeAffinitySpinner;
     EditText etIncidentalTaskName;
     MultiSelectSpinner incidentalPlaceMultiSpinner;
     ArrayList<String> placeDynamicList = new ArrayList<String>();
@@ -51,7 +50,6 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incidental_task);
         etIncidentalTaskName=(EditText)findViewById(R.id.etIncidentalTaskName);
-        incidentalFrequencySpinner=(Spinner)findViewById(R.id.incidentalSpinnerFrequency);
         incidentalPrioritySpinner=(Spinner)findViewById(R.id.incidentalSpinnerPriority);
         incidentalTimeAffinitySpinner=(Spinner)findViewById(R.id.incidentalSpinnerTimeAffinity);
         incidentalPlaceMultiSpinner =(MultiSelectSpinner)findViewById(R.id.incidentalSpinnerPlace);
@@ -113,15 +111,15 @@ public class IncidentalTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectedTask.setName(etIncidentalTaskName.getText().toString());
-                selectedTask.setTaskId("tid"); //TODO
+                Long tsLong = System.currentTimeMillis()/1000;
+                String taskID = tsLong.toString();
+                selectedTask.setTaskId(taskID);
                 selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
-                selectedTask.setDuration((long)100); //TODO
-                selectedTask.setFrequency(freqStringToInt(incidentalFrequencySpinner.getItemAtPosition(incidentalFrequencySpinner.getSelectedItemPosition()).toString()));
                 selectedTask.setSpatialAffinity(selectedPlaces);
                 selectedTask.setStaticScore(incidentalPrioritySpinner.getSelectedItemId());
                 selectedTask.setStatus(Status.FUTURE);
                 selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) incidentalTimeAffinitySpinner.getSelectedItemId()));
-                Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -160,15 +158,16 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         hourNumberPicker.setMinValue(0);
         hourNumberPicker.setWrapSelectorWheel(false);
         final NumberPicker minuteNumberPicker = (NumberPicker) dialogView.findViewById(R.id.minute_number_picker);
-        minuteNumberPicker.setMaxValue(60);
-        minuteNumberPicker.setMinValue(0);
-        minuteNumberPicker.setValue(30);
+        minuteNumberPicker.setMinValue(1);
+        minuteNumberPicker.setMaxValue(4);
+        minuteNumberPicker.setDisplayedValues(new String[]{"0","15","30","45"});
         minuteNumberPicker.setWrapSelectorWheel(false);
         d.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String durationString= String.format("%d h %d m",hourNumberPicker.getValue(),minuteNumberPicker.getValue());
-                long durationMins=hourNumberPicker.getValue()*60+minuteNumberPicker.getValue();
+                long durationMins=hourNumberPicker.getValue()*60+(minuteNumberPicker.getValue()-1)*15;
+                selectedTask.setDuration(durationMins);
                 Toast.makeText(context, durationString, Toast.LENGTH_SHORT).show();
                 tvIncidentalDuration.setText(durationString);
                 Log.d("NumberPicker", "onClick: " + hourNumberPicker.getValue());

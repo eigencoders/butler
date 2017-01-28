@@ -112,9 +112,10 @@ public class RoutineTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectedTask.setName(etRoutineTaskName.getText().toString());
-                selectedTask.setTaskId("tid"); //TODO
+                Long tsLong = System.currentTimeMillis()/1000;
+                String taskIDString = tsLong.toString();
+                selectedTask.setTaskId(taskIDString);
                 selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
-                selectedTask.setDuration((long)100); //TODO
                 selectedTask.setFrequency(freqStringToInt(routineFrequencySpinner.getItemAtPosition(routineFrequencySpinner.getSelectedItemPosition()).toString()));
                 selectedTask.setSpatialAffinity(selectedPlaces);
                 selectedTask.setStaticScore(routinePrioritySpinner.getSelectedItemId());
@@ -156,15 +157,16 @@ public class RoutineTaskActivity extends AppCompatActivity {
         hourNumberPicker.setMinValue(0);
         hourNumberPicker.setWrapSelectorWheel(false);
         final NumberPicker minuteNumberPicker = (NumberPicker) dialogView.findViewById(R.id.minute_number_picker);
-        minuteNumberPicker.setMaxValue(60);
-        minuteNumberPicker.setMinValue(0);
-        minuteNumberPicker.setValue(30);
+        minuteNumberPicker.setMaxValue(4);
+        minuteNumberPicker.setMinValue(1);
+        minuteNumberPicker.setDisplayedValues(new String[]{"0","15","30","45"});
         minuteNumberPicker.setWrapSelectorWheel(false);
         d.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 String durationString= String.format("%d h %d m",hourNumberPicker.getValue(),minuteNumberPicker.getValue());
-                long durationMins=hourNumberPicker.getValue()*60+minuteNumberPicker.getValue();
+                long durationMins=hourNumberPicker.getValue()*60+(minuteNumberPicker.getValue()-1)*15;
+                selectedTask.setDuration(durationMins);
                 Toast.makeText(context, durationString, Toast.LENGTH_SHORT).show();
                 tvRoutineDuration.setText(durationString);
                 Log.d("NumberPicker", "onClick: " + hourNumberPicker.getValue());
