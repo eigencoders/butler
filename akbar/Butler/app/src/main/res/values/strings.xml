@@ -27,8 +27,9 @@
     <string name="very_high">Very High</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="yourName">Your Name</string>
+    <string name="clearPlaces">Clear All</string>
     <string name="duration">Duration</string>
-    <string name="scheduleName">Schedule Name</string>
     <string name="slot1">Midnight to 3 A.M.</string>
     <string name="slot2">3 A.M. to 6 A.M.</string>
     <string name="slot3">6 A.M. to 9 A.M.</string>

@@ -1,6 +1,7 @@
 package com.tech.ab.butler.activities;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
     TextView tvRoutineDeadlineDate,tvRoutineDeadlineTime,tvRoutineDuration;
     Button btnEnterRoutine;
     private String selectedPlaces = "";
+    private int sDay, sMonth, sYear, sHour, sMin;
     Task selectedTask = new Task();
     final Context context = this;
     @Override
@@ -121,6 +124,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
                 selectedTask.setStaticScore(routinePrioritySpinner.getSelectedItemId());
                 selectedTask.setStatus(Status.FUTURE);
                 selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) routineTimeAffinitySpinner.getSelectedItemId()));
+                selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
                 Toast.makeText(RoutineTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -132,7 +136,9 @@ public class RoutineTaskActivity extends AppCompatActivity {
 
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedTask.setDeadline(new Date(year, month, dayOfMonth));
+                sYear=year;
+                sDay=dayOfMonth;
+                sMonth=month;
                 String deadlineDate=  String.format("%d/%d/%d",dayOfMonth,month+1,year);
                 tvRoutineDeadlineDate.setText(deadlineDate);
             }
@@ -141,7 +147,13 @@ public class RoutineTaskActivity extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerDialogFragment();
+        DialogFragment newFragment = new TimePickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                sHour=hourOfDay;
+                sMin=minute;
+            }
+        }, getApplicationContext());
         newFragment.show(getSupportFragmentManager(), "TimePicker");
     }
 

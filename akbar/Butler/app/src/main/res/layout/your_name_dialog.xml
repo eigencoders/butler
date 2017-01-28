@@ -6,8 +6,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/place"
-        android:id="@+id/etAddPlaces"
+        android:hint="@string/yourName"
+        android:id="@+id/etYourName"
         android:layout_margin="@dimen/standard_12"/>
 
 </LinearLayout>

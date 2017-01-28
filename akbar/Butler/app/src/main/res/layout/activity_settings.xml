@@ -32,37 +32,88 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="@dimen/activity_vertical_margin">
 
+    </RelativeLayout>
+
     <TextView
-        android:text="Schedule Name"
-        android:layout_width="@dimen/standard_120"
+        android:text="Your Name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
         android:drawablePadding="@dimen/standard_5"
         android:padding="@dimen/standard_12"
         android:textStyle="bold|italic"
         android:fontFamily="cursive"
-        android:id="@+id/tvScheduleName"
+        android:id="@+id/tvYourName"
         android:gravity="center"
         android:clickable="true"
-        android:layout_gravity="center|left"/>
+        android:layout_gravity="center|left"
+        android:layout_below="@+id/iVButler"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-        <TextView
-            android:text="Add Places"
-            android:layout_width="@dimen/standard_120"
-            android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:drawablePadding="@dimen/standard_5"
-            android:padding="@dimen/standard_12"
-            android:textStyle="bold|italic"
-            android:gravity="center"
-            android:fontFamily="cursive"
-            android:id="@+id/tvAddPlaces"
-            android:layout_gravity="center|right"
-            android:clickable="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+    <TextView
+        android:text="Add Places"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:drawablePadding="@dimen/standard_5"
+        android:padding="@dimen/standard_12"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:fontFamily="cursive"
+        android:id="@+id/tvAddPlaces"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:layout_below="@+id/tvYourName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/standard_12"
+        android:layout_toLeftOf="@+id/btClearPlaces"
+        android:layout_toStartOf="@+id/btClearPlaces"
+        />
 
-    </RelativeLayout>
+    <TextView
+        android:text="@string/clearPlaces"
+        android:textStyle="italic"
+        android:background="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btClearPlaces"
+        android:gravity="center"
+        android:fontFamily="cursive"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/tvAddPlaces"
+        android:layout_alignBottom="@+id/tvAddPlaces"
+        android:drawablePadding="@dimen/standard_5"
+        android:padding="@dimen/standard_12"
+        android:layout_gravity="center"
+        android:clickable="true"
+        android:layout_below="@+id/tvYourName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/standard_12"
+        android:layout_marginLeft="@dimen/standard_12"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAddPlaces">
+    <TextView
+        android:text="Your Places"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:fontFamily="cursive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAddPlaces"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/standard_12"
+        android:id="@+id/tvAddedPlaces"
+        android:clickable="false" />
+    </ScrollView>
+
 
 </RelativeLayout>

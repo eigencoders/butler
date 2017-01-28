@@ -1,6 +1,7 @@
 package com.tech.ab.butler.activities;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class IncidentalTaskActivity extends AppCompatActivity {
     TextView tvIncidentalDeadlineDate,tvIncidentalDeadlineTime,tvIncidentalDuration;
     Button btnEnterIncidental;
     private String selectedPlaces = "";
+    private int sDay, sMonth, sYear, sHour, sMin;
     Task selectedTask = new Task();
     final Context context=this;
     @Override
@@ -114,12 +117,15 @@ public class IncidentalTaskActivity extends AppCompatActivity {
                 Long tsLong = System.currentTimeMillis()/1000;
                 String taskID = tsLong.toString();
                 selectedTask.setTaskId(taskID);
+                selectedTask.setFrequency(0);
                 selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
                 selectedTask.setSpatialAffinity(selectedPlaces);
                 selectedTask.setStaticScore(incidentalPrioritySpinner.getSelectedItemId());
                 selectedTask.setStatus(Status.FUTURE);
                 selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) incidentalTimeAffinitySpinner.getSelectedItemId()));
-                Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_LONG).show();
+                selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
+                Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -127,10 +133,11 @@ public class IncidentalTaskActivity extends AppCompatActivity {
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerDialogFragment( new DatePickerDialog.OnDateSetListener(){
-
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedTask.setDeadline(new Date(year, month, dayOfMonth));
+                sYear=year;
+                sDay=dayOfMonth;
+                sMonth=month;
                 String deadlineDate=  String.format("%d/%d/%d",dayOfMonth,month+1,year);
                 tvIncidentalDeadlineDate.setText(deadlineDate);
             }
@@ -139,11 +146,14 @@ public class IncidentalTaskActivity extends AppCompatActivity {
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerDialogFragment();
+        DialogFragment newFragment = new TimePickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                sHour=hourOfDay;
+                sMin=minute;
+            }
+        }, getApplicationContext());
         newFragment.show(getSupportFragmentManager(), "TimePicker");
-        //TODO - Correct Time Picker
-        //String deadlineTime=  String.format("%d/%d/%d",dayOfMonth,month,year);
-        //tvIncidentalDeadlineTime.setText(deadlineTime);
     }
 
     public void showDurationPickerDialog(View v)

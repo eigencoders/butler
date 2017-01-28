@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager;
-import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -27,8 +27,7 @@ public class TimePickerDialogFragment extends DialogFragment {
         this.context = context;
     }
     TimePickerDialog timePickerDialog;
-    TimePicker timePicker;
-
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Calendar c = Calendar.getInstance();

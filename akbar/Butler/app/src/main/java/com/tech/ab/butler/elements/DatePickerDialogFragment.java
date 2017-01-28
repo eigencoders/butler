@@ -4,9 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager;
-import android.widget.DatePicker;
 
 import java.util.Calendar;
 
@@ -17,7 +17,6 @@ import java.util.Calendar;
 public class DatePickerDialogFragment extends DialogFragment {
 
     private Context context;
-    private Calendar minDate, maxDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
 
@@ -29,8 +28,8 @@ public class DatePickerDialogFragment extends DialogFragment {
         this.context = context;
     }
     DatePickerDialog datePickerDialog;
-    DatePicker datePicker;
-
+    @NonNull
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Calendar cal = Calendar.getInstance();
 

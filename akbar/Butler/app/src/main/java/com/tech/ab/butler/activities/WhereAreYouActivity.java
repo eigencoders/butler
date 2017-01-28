@@ -104,6 +104,7 @@ public class WhereAreYouActivity extends AppCompatActivity {
         }
     };
 
+    Intent addPlacesIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,7 +127,6 @@ public class WhereAreYouActivity extends AppCompatActivity {
 
 
         placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        placeCount = placeSharedPreferences.getInt("placeCount", 0);
 
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
@@ -135,7 +135,6 @@ public class WhereAreYouActivity extends AppCompatActivity {
         findViewById(R.id.compute_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.add_current_place_dialog,null);
                 final Spinner spnAddCurrentPlace = (Spinner) promptsView.findViewById(R.id.etAddCurrentPlace);
@@ -143,40 +142,35 @@ public class WhereAreYouActivity extends AppCompatActivity {
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptsView);
-
-
+                placeCount = placeSharedPreferences.getInt("placeCount", 0);
                 if(placeCount > 0){
                     for(int i = 0; i < placeCount; i++){
                         placeDynamicList.add(placeSharedPreferences.getString("Value["+i+"]", ""));
                     }
+                    spnAddCurrentPlace.setAdapter(adapter);
+                    spnAddCurrentPlace.setOnItemSelectedListener(new OnSpinnerItemClicked());
+                    alertDialogBuilder.setCancelable(false);
+                    alertDialogBuilder.setPositiveButton("Compute",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    // TODO Create a Request, and Call the compute function
+                                    Intent taskListIntent = new Intent(context, TaskListActivity.class);
+                                    startActivity(taskListIntent);
+                                }
+                            });
+                    alertDialogBuilder.setNegativeButton("Cancel",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Toast.makeText(context, "You need to tell me anyway!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                } else {
+                    addPlacesIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                    Toast.makeText(getApplicationContext(), "No Places seem to be added! Please initialise App!", Toast.LENGTH_LONG).show();
+                    startActivity(addPlacesIntent);
                 }
-                spnAddCurrentPlace.setAdapter(adapter);
-                spnAddCurrentPlace.setOnItemSelectedListener(new OnSpinnerItemClicked());
-                alertDialogBuilder.setCancelable(false);
-                alertDialogBuilder.setPositiveButton("Compute",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-
-
-                                        /*TODO-
-                                          Set the current place in DB.
-                                          Call the compute function.
-                                         */
-                                Intent taskListIntent = new Intent(context, TaskListActivity.class);
-                                startActivity(taskListIntent);
-
-                            }
-                        });
-                alertDialogBuilder.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Toast.makeText(context, "You need to tell me anyway!", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-
             }
         });
     }
@@ -241,8 +235,6 @@ public class WhereAreYouActivity extends AppCompatActivity {
                                    View view, int pos, long id) {
             Toast.makeText(parent.getContext(), "Clicked : " +
                     parent.getItemAtPosition(pos).toString(), Toast.LENGTH_LONG).show();
-
-
         }
 
         @Override
