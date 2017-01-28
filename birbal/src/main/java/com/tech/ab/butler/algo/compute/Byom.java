@@ -1,11 +1,12 @@
-package compute;
+package com.tech.ab.butler.algo.compute;
 
-import constants.ComputeConstants;
-import entities.Request;
-import entities.Task;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+import com.tech.ab.butler.algo.entities.Place;
+import com.tech.ab.butler.algo.entities.Request;
+import com.tech.ab.butler.algo.entities.Task;
 import lombok.AllArgsConstructor;
 
-import java.sql.Time;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class Byom {
     private ComputeWeights weightsMap;
 
-    public Map<Task, Double> getScoresMap(List<Task> applicableTasks, Request request) {
+    public Map<Task, Double> getScoresMap(List<Task> applicableTasks, Request request) throws ParseException {
         Map<Task, Double> scores = new HashMap<Task, Double>();
         for (Task task: applicableTasks) {
             scores.put(task, computeScore(task, request, applicableTasks));
@@ -25,13 +26,14 @@ public class Byom {
         return scores;
     }
 
-    private double computeScore(Task t, Request r, List<Task> applicableTasks) {
+    private double computeScore(Task t, Request r, List<Task> applicableTasks) throws ParseException {
         Map<String, Double> scoreMap = new HashMap<String, Double>();
         scoreMap.put(ComputeConstants.PKEY,calculateSpatialPoints(t,r));
         scoreMap.put(ComputeConstants.TKEY,calculateTemporalPoints(t,r));
         scoreMap.put(ComputeConstants.UKEY,calculateUrgencyPoints(t,r));
         scoreMap.put(ComputeConstants.IKEY,calculateStaticScorePoints(t));
         scoreMap.put(ComputeConstants.DKEY,calculateDependencyPenalty(t,applicableTasks));
+        scoreMap.put(ComputeConstants.DMKEY, calculateDeadlineMissPenalty(t,r));
 
         double score = 0.0;
         for (Map.Entry<String, Double> entry :scoreMap.entrySet()) score = score + entry.getValue();
@@ -40,12 +42,14 @@ public class Byom {
 
     private double calculateSpatialPoints(Task t, Request r){
         if(t.getSpatialAffinity().contains(r.getPlace()))
-            return weightsMap.spatialWeights.getYes();
-        return weightsMap.spatialWeights.getNo();
+            return weightsMap.spatialWeights[0];
+        else if (t.getSpatialAffinity().equalsIgnoreCase(Place.ANY.toString()))
+            return weightsMap.spatialWeights[1];
+        return weightsMap.spatialWeights[2];
     }
 
-    private double calculateTemporalPoints(Task t, Request r){
-        if(t.getTemporalAffinity().contains(new Time(r.getRequestTime().getTime())))
+    private double calculateTemporalPoints(Task t, Request r) throws ParseException {
+        if(t.getTemporalAffinity().contains(r.getRequestTime()))
             return weightsMap.temporalWeights.getYes();
         return weightsMap.temporalWeights.getNo();
     }
@@ -70,6 +74,10 @@ public class Byom {
 
     private double calculateDependencyPenalty(Task t, List<Task> allTasks) {
         return allTasks.contains(new Task(t.getDependentTaskId()))? -weightsMap.dependencyPenalty : 0.0;
+    }
+
+    private double calculateDeadlineMissPenalty(Task t, Request r) {
+        return (r.getRequestTime().after(t.getDeadline())) ? -weightsMap.deadlineMissPenalty : 0.0;
     }
 
 }

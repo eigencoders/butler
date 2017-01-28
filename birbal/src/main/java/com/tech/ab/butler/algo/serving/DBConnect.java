@@ -1,10 +1,9 @@
-package serving;
+package com.tech.ab.butler.algo.serving;
 
-import entities.Task;
-import dao.TaskDAO;
+import com.tech.ab.butler.algo.dao.TaskDAO;
+import com.tech.ab.butler.algo.entities.Task;
 import org.skife.jdbi.v2.DBI;
 
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -22,7 +21,10 @@ public class DBConnect {
 //        List<Task> allTasks = taskDAO.getTemporallyEligibleTasks((long)250);
 //        List<Task> allTasks = taskDAO.getSpatiallyEligibleTasks("%OTHER%");
 
-        System.out.println(Arrays.toString(allTasks.toArray()));
+        for (Task t: allTasks) {
+            System.out.println(t);
+        }
+//        System.out.println(Arrays.toString(allTasks.toArray()));
 
     }
 

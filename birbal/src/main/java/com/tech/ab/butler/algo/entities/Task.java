@@ -1,21 +1,23 @@
-package entities;
+package com.tech.ab.butler.algo.entities;
 
-import constants.ComputeConstants;
+import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by shreenath on 11/1/17.
  */
 @Getter
 @Setter
+@ToString(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
 @AllArgsConstructor
 public class Task {
     private String name;
@@ -25,21 +27,10 @@ public class Task {
     private Status status;
     private Long staticScore;
     private Integer frequency;
-    private Timestamp deadline;
+    private Date deadline;
     private TimePeriod temporalAffinity;
     private String spatialAffinity;
 
-    public String toString() {
-        return name + "-" +
-                taskId + "-" +
-                dependentTaskId + "-" +
-                duration + "-" +
-                status + "-" +
-                staticScore + "-" +
-                frequency + "-" +
-                deadline + "-" +
-                spatialAffinity;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -62,7 +53,8 @@ public class Task {
 
         @Override
         public Task map(int i, ResultSet r, StatementContext sc) throws SQLException {
-            TimePeriod timePeriod = new TimePeriod(r.getTime("startTimeOfTheDay"), r.getTime("endTimeOfTheDay"));
+            TimePeriod timePeriod = null;
+            timePeriod = new TimePeriod(r.getString("startTimeOfTheDay"), r.getString("endTimeOfTheDay"));
             return new Task(r.getString("name"),
                     r.getString("taskId"),
                     r.getString("dependentTaskId"),

@@ -1,6 +1,7 @@
-package entities;
+package com.tech.ab.butler.algo.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Data
 public class WeightPair {
     double yes;
     double no;

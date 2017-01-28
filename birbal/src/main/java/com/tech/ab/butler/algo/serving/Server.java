@@ -4,19 +4,14 @@ import com.tech.ab.butler.algo.compute.Byom;
 import com.tech.ab.butler.algo.compute.ComputeWeights;
 import com.tech.ab.butler.algo.compute.ComputeWeightsBuilder;
 import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
+import com.tech.ab.butler.algo.dao.TaskDAO;
 import com.tech.ab.butler.algo.entities.Request;
 import com.tech.ab.butler.algo.entities.Task;
+import org.skife.jdbi.v2.DBI;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by shreenath on 12/1/17.
@@ -24,7 +19,7 @@ import java.util.Map;
 public class Server {
 
     private static Request prepareRequest() throws ParseException {
-        Date d = ComputeConstants.format.parse("15/01/2017 00:00:00");
+        Date d = ComputeConstants.format.parse("15/01/2017 19:00:00");
         String p = "OFFICE";
         System.out.println(String.format("Request is for : %s,%s",d,p));
         return new Request(new Timestamp(d.getTime()),p);
@@ -42,9 +37,9 @@ public class Server {
     }
 
     private static Map<Task, Double> getResponseFor(Request request) throws ParseException {
-//        DBI dbi = DBConnect.getDBI();
-//        TaskDAO taskDAO = dbi.open(TaskDAO.class);
-        List<Task> availableTasks = new ArrayList<>();// taskDAO.getFutureTasks();
+        DBI dbi = DBConnect.getDBI();
+        TaskDAO taskDAO = dbi.open(TaskDAO.class);
+        List<Task> availableTasks = taskDAO.getFutureTasks();
         Byom bakshi = instantiateSatyanveshi();
         return bakshi.getScoresMap(availableTasks, request);
     }

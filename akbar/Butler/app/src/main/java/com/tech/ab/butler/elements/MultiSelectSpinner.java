@@ -96,7 +96,7 @@ public class MultiSelectSpinner extends Spinner implements
         // all selected by default
         selected = new boolean[items.size()];
         for (int i = 0; i < selected.length; i++)
-            selected[i] = true;
+            selected[i] = false;
 
         // all text on the spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),

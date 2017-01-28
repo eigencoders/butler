@@ -1,6 +1,6 @@
-package compute;
+package com.tech.ab.butler.algo.compute;
 
-import entities.WeightPair;
+import com.tech.ab.butler.algo.entities.WeightPair;
 import lombok.AllArgsConstructor;
 
 /**
@@ -8,11 +8,12 @@ import lombok.AllArgsConstructor;
  */
 @AllArgsConstructor
 public class ComputeWeights {
-    WeightPair spatialWeights;
+    Double[] spatialWeights;
     WeightPair temporalWeights;
     Double[] urgencyWeights;
     double inherentScoreWeight;
     double dependencyPenalty;
+    double deadlineMissPenalty;
 //    WeightPair spatialWeights;
 //    WeightPair spatialWeights;
     
