@@ -3,7 +3,9 @@ package com.tech.ab.butler.activities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +19,19 @@ public class SettingsActivity extends AppCompatActivity {
     TextView tvAddPlaces, tvScheduleName;
     EditText etAddPlaces,etScheduleName;
     final Activity context=this;
+    SharedPreferences placeSharedPreferences;
+    SharedPreferences.Editor pspEditor;
+    int placeCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         tvAddPlaces=(TextView)findViewById(R.id.tvAddPlaces);
         tvScheduleName=(TextView)findViewById(R.id.tvScheduleName);
+        placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        pspEditor = placeSharedPreferences.edit();
+
 
         tvAddPlaces.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,9 +53,12 @@ public class SettingsActivity extends AppCompatActivity {
                                         // get user input and set it to result
                                         // edit text
                                         etAddPlaces.setText(etAddPlaces.getText());
-                                        /*TODO-
-                                          Populate a string array accordingly.
-                                         */
+                                        pspEditor.putString("Value["+placeCount+"]", etAddPlaces.getText().toString());
+                                        pspEditor.commit();
+                                        placeCount += 1;
+                                        pspEditor.putInt("placeCount", placeCount);
+                                        pspEditor.commit();
+
                                     }
                                 })
                         .setNegativeButton("Cancel",
