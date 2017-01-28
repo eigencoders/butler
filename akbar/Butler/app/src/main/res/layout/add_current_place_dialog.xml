@@ -6,14 +6,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_12"
         android:text="@string/addPlace"
         android:textSize="@dimen/standard_16"
         android:fontFamily="cursive"
         android:textStyle="bold|italic"/>
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_12"
         android:hint="@string/place"
         android:id="@+id/etAddCurrentPlace"/>
 

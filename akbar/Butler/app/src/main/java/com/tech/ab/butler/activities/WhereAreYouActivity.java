@@ -5,23 +5,33 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.tech.ab.butler.R;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class WhereAreYouActivity extends AppCompatActivity {
+
+    ArrayList<String> placeDynamicList = new ArrayList<String>();
+    SharedPreferences placeSharedPreferences;
+    int placeCount = 0;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -113,28 +123,44 @@ public class WhereAreYouActivity extends AppCompatActivity {
             }
         });
 
+
+
+        placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        placeCount = placeSharedPreferences.getInt("placeCount", 0);
+
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
+        final Context ctx=getApplicationContext();
         findViewById(R.id.compute_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 LayoutInflater li = LayoutInflater.from(context);
                 View promptsView = li.inflate(R.layout.add_current_place_dialog,null);
+                final Spinner spnAddCurrentPlace = (Spinner) promptsView.findViewById(R.id.etAddCurrentPlace);
+                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(ctx, android.R.layout.simple_spinner_item, placeDynamicList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptsView);
-                final EditText etAddCurrentPlace = (EditText) promptsView
-                        .findViewById(R.id.etAddCurrentPlace);
+
+
+                if(placeCount > 0){
+                    for(int i = 0; i < placeCount; i++){
+                        placeDynamicList.add(placeSharedPreferences.getString("Value["+i+"]", ""));
+                    }
+                }
+                spnAddCurrentPlace.setAdapter(adapter);
+                spnAddCurrentPlace.setOnItemSelectedListener(new OnSpinnerItemClicked());
                 alertDialogBuilder.setCancelable(false);
                 alertDialogBuilder.setPositiveButton("Compute",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // get user input and set it to result
-                                // edit text
-                                etAddCurrentPlace.setText(etAddCurrentPlace.getText());
+
+
+
                                         /*TODO-
-                                          Populate the place accordingly.
+                                          Set the current place in DB.
                                           Call the compute function.
                                          */
                                 Intent taskListIntent = new Intent(context, TaskListActivity.class);
@@ -213,4 +239,22 @@ public class WhereAreYouActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    public class OnSpinnerItemClicked implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent,
+                                   View view, int pos, long id) {
+            Toast.makeText(parent.getContext(), "Clicked : " +
+                    parent.getItemAtPosition(pos).toString(), Toast.LENGTH_LONG).show();
+
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView parent) {
+            // Do nothing.
+        }
+    }
 }
+

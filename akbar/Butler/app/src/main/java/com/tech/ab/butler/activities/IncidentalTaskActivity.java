@@ -1,6 +1,8 @@
 package com.tech.ab.butler.activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,8 +16,7 @@ import com.tech.ab.butler.elements.DatePickerDialogFragment;
 import com.tech.ab.butler.elements.MultiSelectSpinner;
 import com.tech.ab.butler.elements.TimePickerDialogFragment;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 public class IncidentalTaskActivity extends AppCompatActivity {
 
@@ -23,6 +24,9 @@ public class IncidentalTaskActivity extends AppCompatActivity {
     EditText etIncidentalTaskName;
     MultiSelectSpinner incidentalPlaceMultiSpinner;
     Button btnIncidentalDeadlineDate,btnIncidentalDeadlineTime;
+    ArrayList<String> placeDynamicList = new ArrayList<String>();
+    SharedPreferences placeSharedPreferences;
+    int placeCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +39,23 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         btnIncidentalDeadlineDate = (Button)findViewById(R.id.btnDateIncidental);
         btnIncidentalDeadlineTime = (Button)findViewById(R.id.btnTimeIncidental);
 
-        final List<String> list = Arrays.asList(getResources().getStringArray(R.array.placeList));
-        incidentalPlaceMultiSpinner.setItems(list, "Choose a Place", new MultiSelectSpinner.MultiSelectSpinnerListener() {
+        placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        placeCount = placeSharedPreferences.getInt("placeCount", 0);
+        if(placeCount > 0){
+            for(int i = 0; i < placeCount; i++){
+                placeDynamicList.add(placeSharedPreferences.getString("Value["+i+"]", ""));
+            }
+        }
+
+        //final List<String> list = Arrays.asList(getResources().getStringArray(R.array.placeList));
+
+        incidentalPlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place", new MultiSelectSpinner.MultiSelectSpinnerListener() {
             @Override
             public void onItemsSelected(boolean[] selected) {
                 for(int i=0; i<selected.length; i++) {
                     if(selected[i]) {
                         //TODO - Add the selected items to database
-                        Log.i("TAG", i + " : "+ list.get(i));
+                        Log.i("TAG", i + " : "+ placeDynamicList.get(i));
                     }
                 }
             }
