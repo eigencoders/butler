@@ -174,14 +174,8 @@ public class WhereAreYouActivity extends AppCompatActivity {
                                 Toast.makeText(context, "You need to tell me anyway!", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-                // create alert dialog
                 AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
                 alertDialog.show();
-
-
 
             }
         });

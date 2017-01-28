@@ -34,17 +34,7 @@ public class TimePickerDialogFragment extends DialogFragment {
         Calendar c = Calendar.getInstance();
 
         timePickerDialog = new TimePickerDialog(getContext(), mTimeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
-//        timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//            @Override
-//            public void onShow(DialogInterface dialog) {
-//                try {
-//                    //TODO
-//                } catch (NullPointerException e) {
-//                    dialog.dismiss();
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return timePickerDialog;
     }

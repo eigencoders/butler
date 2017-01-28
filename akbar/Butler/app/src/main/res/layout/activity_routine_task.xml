@@ -13,19 +13,13 @@
         android:orientation="vertical"
         android:background="@color/colorPrimaryLight">
 
-        <!--<ImageView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/routine"-->
-            <!--android:layout_gravity="center"-->
-            <!--/>-->
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/taskName"
         android:textSize="@dimen/standard_23"
-        android:fontFamily="cursive"
-        android:textStyle="bold|italic"/>
+        android:layout_margin="@dimen/standard_5"
+        android:textStyle="bold|italic" />
 
         <EditText
             android:id="@+id/etRoutineTaskName"
@@ -38,9 +32,9 @@
         <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/standard_5"
         android:text="@string/frequency"
         android:textSize="@dimen/standard_23"
-        android:fontFamily="cursive"
         android:textStyle="bold|italic"/>
 
         <Spinner
@@ -57,8 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/place"
+            android:layout_margin="@dimen/standard_5"
             android:textSize="@dimen/standard_23"
-            android:fontFamily="cursive"
             android:textStyle="bold|italic"/>
 
         <com.tech.ab.butler.elements.MultiSelectSpinner
@@ -72,8 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/priority"
+            android:layout_margin="@dimen/standard_5"
             android:textSize="@dimen/standard_23"
-            android:fontFamily="cursive"
             android:textStyle="bold|italic"/>
 
         <Spinner
@@ -90,8 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/time_affinity"
+            android:layout_margin="@dimen/standard_5"
             android:textSize="@dimen/standard_23"
-            android:fontFamily="cursive"
             android:textStyle="bold|italic"/>
 
         <Spinner
@@ -107,30 +101,61 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/duration"
+            android:textSize="@dimen/standard_23"
+            android:layout_margin="@dimen/standard_5"
+            android:textStyle="bold|italic"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="@string/duration"
+            android:layout_marginLeft="@dimen/standard_8"
+            android:id="@+id/tvDurationRoutine"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/deadline"
             android:textSize="@dimen/standard_23"
             android:fontFamily="cursive"
-            android:textStyle="bold|italic"/>
+            android:textStyle="bold|italic"
+            android:layout_margin="@dimen/standard_5"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            >
 
-            <Button
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
-                android:id="@+id/btnDateRoutine"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/standard_5"
+                android:id="@+id/tvDeadlineDateRoutine"
+                android:padding="@dimen/standard_5"
+                android:text="Deadline Date"
+                android:clickable="true"
+                android:background="#34c7fc"
+                android:gravity="center"
                 />
 
-            <Button
-                android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/time"
-                android:id="@+id/btnTimeRoutine"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/standard_5"
+                android:gravity="center"
+                android:id="@+id/tvDeadlineTimeRoutine"
+                android:text="Deadline Time"
+                android:background="#34c7fc"
+                android:padding="@dimen/standard_5"
+                android:clickable="true"
                 />
 
         </LinearLayout>
