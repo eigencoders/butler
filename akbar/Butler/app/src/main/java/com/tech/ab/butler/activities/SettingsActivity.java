@@ -66,9 +66,9 @@ public class SettingsActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         if(!etAddPlaces.getText().toString().trim().isEmpty()) {
                                             etAddPlaces.setText(etAddPlaces.getText());
-                                            placeSharedPreferences.edit().putString("Value[" + placeCount + "]", etAddPlaces.getText().toString()).apply();
+                                            placeSharedPreferences.edit().putString("Value[" + placeCount + "]", etAddPlaces.getText().toString()).commit();
                                             placeCount += 1;
-                                            placeSharedPreferences.edit().putInt("placeCount", placeCount).apply();
+                                            placeSharedPreferences.edit().putInt("placeCount", placeCount).commit();
                                             updateAddedPlacesText();
                                         } else {
                                             etAddPlaces.setError("Cannot be left blank!");
@@ -99,7 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 Log.d("placeCountShr", String.valueOf(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt("placeCount",0)));
-                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putInt("placeCount",0).apply();
+                                PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putInt("placeCount",0).commit();
                                 Log.d("placeCountShr", String.valueOf(PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getInt("placeCount",0)));
                                 updateAddedPlacesText();
                             }})
@@ -128,7 +128,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     public void onClick(DialogInterface dialog,int id) {
                                         if(!etYourName.getText().toString().trim().isEmpty()) {
                                             etYourName.setText(etYourName.getText());
-                                            placeSharedPreferences.edit().putString("yourName", etYourName.getText().toString()).apply();
+                                            placeSharedPreferences.edit().putString("yourName", etYourName.getText().toString()).commit();
                                             tvYourName.setText(placeSharedPreferences.getString("yourName", ""));
                                             Toast.makeText(context, String.format("Welcome, %s", placeSharedPreferences.getString("yourName", "null")), Toast.LENGTH_SHORT).show();
                                         } else {
