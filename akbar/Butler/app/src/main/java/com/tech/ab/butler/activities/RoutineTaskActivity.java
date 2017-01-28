@@ -1,6 +1,7 @@
 package com.tech.ab.butler.activities;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.tech.ab.butler.R;
@@ -37,6 +39,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
     int placeCount = 0;
     Button btnRoutineDeadlineDate,btnRoutineDeadlineTime, btnEnterRoutine;
     private String selectedPlaces = "";
+    private int sDay, sMonth, sYear, sHour, sMin;
     Task selectedTask = new Task();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
                 selectedTask.setStaticScore(routinePrioritySpinner.getSelectedItemId());
                 selectedTask.setStatus(Status.FUTURE);
                 selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) routineTimeAffinitySpinner.getSelectedItemId()));
+                selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
                 Toast.makeText(RoutineTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -110,14 +114,22 @@ public class RoutineTaskActivity extends AppCompatActivity {
 
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedTask.setDeadline(new Date(year, month, dayOfMonth));
+                sYear=year;
+                sDay=dayOfMonth;
+                sMonth=month;
             }
         }, getApplicationContext());
         newFragment.show(getSupportFragmentManager(), "DatePicker");
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerDialogFragment();
+        DialogFragment newFragment = new TimePickerDialogFragment(new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                sHour=hourOfDay;
+                sMin=minute;
+            }
+        }, getApplicationContext());
         newFragment.show(getSupportFragmentManager(), "TimePicker");
     }
 }

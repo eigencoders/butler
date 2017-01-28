@@ -4,9 +4,9 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.view.WindowManager;
-import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -27,24 +27,13 @@ public class TimePickerDialogFragment extends DialogFragment {
         this.context = context;
     }
     TimePickerDialog timePickerDialog;
-    TimePicker timePicker;
-
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Calendar c = Calendar.getInstance();
 
         timePickerDialog = new TimePickerDialog(getContext(), mTimeSetListener, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), true);
-//        timePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//            @Override
-//            public void onShow(DialogInterface dialog) {
-//                try {
-//                    //TODO
-//                } catch (NullPointerException e) {
-//                    dialog.dismiss();
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return timePickerDialog;
     }
