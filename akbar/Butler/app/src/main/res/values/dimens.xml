@@ -5,6 +5,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="standard_5">5dp</dimen>
+    <dimen name="standard_8">8dp</dimen>
     <dimen name="standard_12">12dp</dimen>
     <dimen name="standard_23">23dp</dimen>
     <dimen name="standard_50">50dp</dimen>

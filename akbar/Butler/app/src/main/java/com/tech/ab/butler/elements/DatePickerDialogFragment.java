@@ -35,21 +35,6 @@ public class DatePickerDialogFragment extends DialogFragment {
         Calendar cal = Calendar.getInstance();
 
         datePickerDialog = new DatePickerDialog(getActivity(), this.mDateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
-//        datePickerDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//            @Override
-//            public void onShow(DialogInterface dialog) {
-//                try {
-//                    if (minDate !=null && maxDate !=null) {
-//                        ((DatePickerDialog) dialog).getDatePicker().setMaxDate(maxDate.getTimeInMillis());
-//                        ((DatePickerDialog) dialog).getDatePicker().setMinDate(minDate.getTimeInMillis());
-//
-//                    }
-//                } catch (NullPointerException e) {
-//                    dialog.dismiss();
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return datePickerDialog;
     }
