@@ -15,6 +15,7 @@
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/compute_content"
+        android:fontFamily="cursive"
         android:textColor="#33b5e5"
         android:textSize="50sp"
         android:textStyle="bold" />

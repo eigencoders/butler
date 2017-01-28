@@ -147,7 +147,6 @@ public class WhereAreYouActivity extends AppCompatActivity {
                     for(int i = 0; i < placeCount; i++){
                         placeDynamicList.add(placeSharedPreferences.getString("Value["+i+"]", ""));
                     }
-
                     spnAddCurrentPlace.setAdapter(adapter);
                     spnAddCurrentPlace.setOnItemSelectedListener(new OnSpinnerItemClicked());
                     alertDialogBuilder.setCancelable(false);
@@ -165,11 +164,7 @@ public class WhereAreYouActivity extends AppCompatActivity {
                                     Toast.makeText(context, "You need to tell me anyway!", Toast.LENGTH_SHORT).show();
                                 }
                             });
-
-                    // create alert dialog
                     AlertDialog alertDialog = alertDialogBuilder.create();
-
-                    // show it
                     alertDialog.show();
                 } else {
                     addPlacesIntent = new Intent(getApplicationContext(), SettingsActivity.class);
