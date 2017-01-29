@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,10 +26,12 @@ import android.widget.Toast;
 import com.tech.ab.butler.R;
 import com.tech.ab.butler.algo.entities.Status;
 import com.tech.ab.butler.algo.entities.Task;
+import com.tech.ab.butler.db.ButlerSQLiteDB;
 import com.tech.ab.butler.elements.DatePickerDialogFragment;
 import com.tech.ab.butler.elements.MultiSelectSpinner;
 import com.tech.ab.butler.elements.TimePickerDialogFragment;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -126,6 +129,14 @@ public class RoutineTaskActivity extends AppCompatActivity {
                 selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) routineTimeAffinitySpinner.getSelectedItemId()));
                 selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
                 Toast.makeText(RoutineTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
+                ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
+                butlerSQLiteDB.insertTask(selectedTask);
+                try {
+                    Log.d("getFromDB",""+butlerSQLiteDB.getAvailableTasks().size());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(getApplicationContext(), TaskListActivity.class));
             }
         });
     }
