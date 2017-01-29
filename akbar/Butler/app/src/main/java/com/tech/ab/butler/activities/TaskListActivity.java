@@ -4,22 +4,30 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.tech.ab.butler.R;
+import com.tech.ab.butler.algo.entities.Task;
+import com.tech.ab.butler.db.ButlerSQLiteDB;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 
-
-public class TaskListActivity extends AppCompatActivity {
+public class TaskListActivity extends ActionBarListActivity {
 
     FloatingActionButton fabMain, fabRoutine, fabIncidentals;
     LinearLayout fabRoutineLayout, fabIncidentalsLayout;
@@ -47,8 +55,10 @@ public class TaskListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (!isFABOpen) {
                     showFABMenu();
+                    Log.d("fabThing","showFABMenu()");
                 } else {
                     closeFABMenu();
+                    Log.d("fabThing","closeFABMenu()");
                 }
             }
         });
@@ -58,7 +68,6 @@ public class TaskListActivity extends AppCompatActivity {
                 //Toast.makeText(TaskListActivity.this, "Clicked fabRoutine", Toast.LENGTH_SHORT).show();
                 routineIntent = new Intent(getApplicationContext(), RoutineTaskActivity.class);
                 startActivity(routineIntent);
-
             }
         });
 
@@ -74,6 +83,22 @@ public class TaskListActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        ButlerSQLiteDB db = new ButlerSQLiteDB(getApplicationContext());
+        List<String> taskStrList = new ArrayList<>();
+        String[] taskDetailsArray = new String[]{};
+        try {
+            List<Task> tasks = db.getAvailableTasks();
+            for (Task t: tasks ) {
+                taskStrList.add(t.toString());
+            }
+            Log.d("sizeTask",""+tasks.size());
+            taskDetailsArray = taskStrList.toArray(new String[taskStrList.size()]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, taskDetailsArray);
+        setListAdapter(adapter);
     }
 
     @Override
@@ -98,6 +123,18 @@ public class TaskListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        Log.d("click", "Position click " + position);
+        String item = (String) getListAdapter().getItem(position);
+        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected int getListViewId() {
+        return R.id.content_task_list;
     }
 
     private void showFABMenu() {
