@@ -30,18 +30,18 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/standard_100"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/standard_100"
         android:visibility="invisible">
 
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:gravity="center|left"
             android:text="Set Routine"
             android:padding="@dimen/standard_5"
-            android:id="@+id/textView" />
+            android:id="@+id/textView" /-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabRoutine"
@@ -72,18 +72,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:layout_marginBottom="@dimen/standard_180"
-        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/standard_180"
         android:layout_gravity="bottom|end"
         android:visibility="invisible">
 
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryDark"
             android:text="Set an Incidental Task"
             android:gravity="center|left"
-            android:padding="@dimen/standard_5"/>
+            android:padding="@dimen/standard_5"/-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabIncidentals"
