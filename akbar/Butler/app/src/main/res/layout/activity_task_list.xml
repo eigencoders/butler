@@ -21,78 +21,50 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_task_list" />
+    <include layout="@layout/content_task_list"/>
 
-
-    <LinearLayout
-        android:id="@+id/fabRoutineLayout"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/standard_100"
-        android:visibility="invisible">
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
 
-        <!--TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:gravity="center|left"
-            android:text="Set Routine"
-            android:padding="@dimen/standard_5"
-            android:id="@+id/textView" /-->
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabRoutine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:srcCompat="@android:drawable/ic_menu_recent_history"
-            app:fabSize="auto"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_gravity="bottom|end">
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_menu_view" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/fabIncidentalsLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/standard_180"
-        android:layout_gravity="bottom|end"
-        android:visibility="invisible">
-
-        <!--TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="Set an Incidental Task"
-            android:gravity="center|left"
-            android:padding="@dimen/standard_5"/-->
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/standard_16"
+            android:layout_marginBottom="@dimen/standard_12"
+            app:srcCompat="@android:drawable/ic_menu_view"
+             />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fabIncidentals"
+            android:id="@+id/fabRoutine"
             android:layout_width="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/standard_16"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:srcCompat="@android:drawable/ic_menu_today"
-            app:fabSize="auto"/>
+            android:layout_marginBottom="@dimen/standard_12"
+            app:srcCompat="@android:drawable/ic_menu_recent_history"
+            app:fabSize="auto"
+            android:visibility="invisible"
+            />
 
-    </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabIncidentals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/standard_12"
+        app:srcCompat="@android:drawable/ic_menu_today"
+        app:fabSize="auto"
+        android:layout_gravity="bottom|center_horizontal"
+        android:visibility="invisible"/>
+
+
+
 
 </android.support.design.widget.CoordinatorLayout>

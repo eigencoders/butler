@@ -162,6 +162,8 @@ public class IncidentalTaskActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 sHour=hourOfDay;
                 sMin=minute;
+                String deadlineTime = String.format("%d:%d",sHour,sMin);
+                tvIncidentalDeadlineTime.setText(deadlineTime);
             }
         }, getApplicationContext());
         newFragment.show(getSupportFragmentManager(), "TimePicker");
@@ -186,8 +188,9 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         d.setPositiveButton("Done", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String durationString= String.format("%d h %d m",hourNumberPicker.getValue(),minuteNumberPicker.getValue());
-                long durationMins=hourNumberPicker.getValue()*60+(minuteNumberPicker.getValue()-1)*15;
+                int minsChosen=(minuteNumberPicker.getValue()-1)*15;
+                String durationString= String.format("%d h %d m",hourNumberPicker.getValue(),minsChosen);
+                long durationMins=hourNumberPicker.getValue()*60+minsChosen;
                 selectedTask.setDuration(durationMins);
                 Toast.makeText(context, durationString, Toast.LENGTH_SHORT).show();
                 tvIncidentalDuration.setText(durationString);

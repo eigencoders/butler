@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import java.util.List;
 public class TaskListActivity extends ActionBarListActivity {
 
     FloatingActionButton fabMain, fabRoutine, fabIncidentals;
-    LinearLayout fabRoutineLayout, fabIncidentalsLayout;
     Intent routineIntent, incidentalIntent,settingsIntent;
     boolean isFABOpen = false;
     /**
@@ -48,8 +46,6 @@ public class TaskListActivity extends ActionBarListActivity {
         fabMain = (FloatingActionButton) findViewById(R.id.fabMain);
         fabRoutine = (FloatingActionButton) findViewById(R.id.fabRoutine);
         fabIncidentals = (FloatingActionButton) findViewById(R.id.fabIncidentals);
-        fabRoutineLayout = (LinearLayout) findViewById(R.id.fabRoutineLayout);
-        fabIncidentalsLayout = (LinearLayout) findViewById(R.id.fabIncidentalsLayout);
         fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,15 +135,15 @@ public class TaskListActivity extends ActionBarListActivity {
 
     private void showFABMenu() {
         isFABOpen = true;
-        fabIncidentalsLayout.setVisibility(View.VISIBLE);
-        fabRoutineLayout.setVisibility(View.VISIBLE);
+        fabIncidentals.setVisibility(View.VISIBLE);
+        fabRoutine.setVisibility(View.VISIBLE);
         fabMain.animate().rotationBy(360);
     }
 
     private void closeFABMenu() {
         isFABOpen = false;
-        fabIncidentalsLayout.setVisibility(View.INVISIBLE);
-        fabRoutineLayout.setVisibility(View.INVISIBLE);
+        fabIncidentals.setVisibility(View.INVISIBLE);
+        fabRoutine.setVisibility(View.INVISIBLE);
     }
 
     /**

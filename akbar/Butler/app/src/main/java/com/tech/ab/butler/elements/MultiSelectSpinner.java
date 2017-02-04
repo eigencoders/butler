@@ -63,7 +63,7 @@ public class MultiSelectSpinner extends Spinner implements
             spinnerText = defaultText;
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_spinner_dropdown_item,
                 new String[] { spinnerText });
         setAdapter(adapter);
         listener.onItemsSelected(selected);
@@ -100,7 +100,7 @@ public class MultiSelectSpinner extends Spinner implements
 
         // all text on the spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_item, new String[] { allText });
+                android.R.layout.simple_spinner_dropdown_item, new String[] { allText });
         setAdapter(adapter);
     }
 
