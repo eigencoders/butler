@@ -79,13 +79,13 @@ public class RoutineTaskActivity extends AppCompatActivity {
             }
         }
 
+
         routinePlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place", new MultiSelectSpinner.MultiSelectSpinnerListener() {
             @Override
             public void onItemsSelected(boolean[] selected) {
                 selectedPlaces ="";
                 for(int i=0; i<selected.length; i++) {
                     if(selected[i]) {
-                        Log.i("TAG", i + " : "+ placeDynamicList.get(i));
                         selectedPlaces = selectedPlaces + placeDynamicList.get(i)+",";
                     }
                 }
