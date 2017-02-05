@@ -41,12 +41,12 @@ import static com.tech.ab.butler.algo.computeconstants.ComputeConstants.getTimeA
 public class RoutineTaskActivity extends AppCompatActivity {
 
     Spinner routineFrequencySpinner,routinePrioritySpinner, routineTimeAffinitySpinner;
-    EditText etRoutineTaskName;
+    EditText etRoutineTaskName,etRoutineDuration;
     MultiSelectSpinner routinePlaceMultiSpinner;
     ArrayList<String> placeDynamicList = new ArrayList<String>();
     SharedPreferences placeSharedPreferences;
     int placeCount = 0;
-    TextView tvRoutineDeadlineDate,tvRoutineDeadlineTime,tvRoutineDuration;
+    TextView tvRoutineDeadlineDate,tvRoutineDeadlineTime;
     Button btnEnterRoutine;
     private String selectedPlaces = "";
     private int sDay, sMonth, sYear, sHour, sMin;
@@ -63,7 +63,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
         routinePlaceMultiSpinner =(MultiSelectSpinner)findViewById(R.id.routineSpinnerPlace);
         tvRoutineDeadlineDate = (TextView) findViewById(R.id.tvDeadlineDateRoutine);
         tvRoutineDeadlineTime = (TextView) findViewById(R.id.tvDeadlineTimeRoutine);
-        tvRoutineDuration = (TextView) findViewById(R.id.tvDurationRoutine);
+        etRoutineDuration = (EditText) findViewById(R.id.tvDurationRoutine);
         btnEnterRoutine = (Button)findViewById(R.id.btnEnterRoutine);
 
         if(etRoutineTaskName.getText().toString().isEmpty())
@@ -93,7 +93,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
             }
         });
 
-        tvRoutineDuration.setOnClickListener(new View.OnClickListener() {
+        etRoutineDuration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDurationPickerDialog(v);
@@ -194,7 +194,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
                 long durationMins=hourNumberPicker.getValue()*60+minsChosen;
                 selectedTask.setDuration(durationMins);
                 Toast.makeText(context, durationString, Toast.LENGTH_SHORT).show();
-                tvRoutineDuration.setText(durationString);
+                etRoutineDuration.setText(durationString);
                 Log.d("NumberPicker", "onClick: " + hourNumberPicker.getValue());
             }
         });
