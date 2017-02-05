@@ -2,163 +2,265 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/svRoutineTask"
-    android:layout_width="fill_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:scrollbars="vertical"
-    android:background="@color/colorPrimaryLight">
+    android:background="@color/colorPrimaryLight"
+    >
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:background="@color/colorPrimaryLight">
-
-        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/taskName"
-        android:textSize="@dimen/standard_23"
-        android:layout_margin="@dimen/standard_5"
-        android:textStyle="bold|italic" />
+        android:orientation="vertical"
+        android:background="@color/colorWhite">
 
-        <EditText
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/standard_12">
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/taskName"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/standard_16"
+            android:layout_centerVertical="true"
+            android:textStyle="italic"
+            android:layout_alignBaseline="@+id/etRoutineTaskName"
+            android:layout_alignBottom="@+id/etRoutineTaskName"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp" />
+
+            <EditText
             android:id="@+id/etRoutineTaskName"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Task Name"
-            android:inputType="textPersonName"
-            />
+                android:layout_centerVertical="true"
+                android:inputType="textPersonName"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standard_5"
-        android:text="@string/frequency"
-        android:textSize="@dimen/standard_23"
-        android:textStyle="bold|italic"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_marginBottom="@dimen/standard_12"
+            android:text="@string/frequency"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/standard_16"
+            android:textStyle="italic"/>
 
         <Spinner
             android:id="@+id/routineSpinnerFrequency"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:entries="@array/frequencyList"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_marginBottom="@dimen/standard_12"
             android:prompt="@string/frequencyResponse"
             android:spinnerMode="dialog">
         </Spinner>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/place"
-            android:layout_margin="@dimen/standard_5"
-            android:textSize="@dimen/standard_23"
-            android:textStyle="bold|italic"/>
+        </RelativeLayout>
 
-        <com.tech.ab.butler.elements.MultiSelectSpinner
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/routineSpinnerPlace"
-            >
-        </com.tech.ab.butler.elements.MultiSelectSpinner>
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/place"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/standard_12"
+                android:layout_marginBottom="@dimen/standard_12"
+                android:textSize="@dimen/standard_16"
+                android:textColor="@color/colorAccent"
+                android:textStyle="italic"/>
+
+            <com.tech.ab.butler.elements.MultiSelectSpinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/standard_12"
+                android:layout_marginBottom="@dimen/standard_12"
+                android:id="@+id/routineSpinnerPlace"
+                >
+            </com.tech.ab.butler.elements.MultiSelectSpinner>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/priority"
-            android:layout_margin="@dimen/standard_5"
-            android:textSize="@dimen/standard_23"
-            android:textStyle="bold|italic"/>
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/standard_12"
+            android:textSize="@dimen/standard_16"
+            android:textColor="@color/colorAccent"
+            android:textStyle="italic"/>
 
         <Spinner
             android:id="@+id/routineSpinnerPriority"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:entries="@array/priorityList"
-            android:prompt="@string/priorityResponse"
-            android:spinnerMode="dialog">
-        </Spinner>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time_affinity"
-            android:layout_margin="@dimen/standard_5"
-            android:textSize="@dimen/standard_23"
-            android:textStyle="bold|italic"/>
+            android:scrollbars="vertical"
+            android:layout_centerVertical="true"
+            android:entries="@array/priorityList"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_marginBottom="@dimen/standard_12"
+            android:prompt="@string/priorityResponse"
+            android:spinnerMode="dialog"
+            >
+        </Spinner>
+        </RelativeLayout>
 
-        <Spinner
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <Spinner
             android:id="@+id/routineSpinnerTimeAffinity"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbars="vertical"
             android:entries="@array/timeAffinityList"
+            android:layout_marginTop="@dimen/standard_12"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_marginBottom="@dimen/standard_12"
             android:prompt="@string/timeAffinityResponse"
-            android:spinnerMode="dialog">
+            android:spinnerMode="dialog"
+          >
         </Spinner>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_affinity"
+                android:textSize="@dimen/standard_16"
+                android:textColor="@color/colorAccent"
+                android:textStyle="italic"
+                android:layout_alignTop="@+id/routineSpinnerTimeAffinity"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/duration"
-            android:textSize="@dimen/standard_23"
-            android:layout_margin="@dimen/standard_5"
-            android:textStyle="bold|italic"/>
+            android:textSize="@dimen/standard_16"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/standard_12"
+            android:layout_marginLeft="@dimen/standard_12"
+            android:layout_marginBottom="@dimen/standard_12"
+            android:textStyle="italic"/>
 
-        <TextView
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:hint="@string/duration"
+                android:layout_marginRight="19dp"
+                android:id="@+id/tvDurationRoutine"
+                android:clickable="true"
+                android:layout_marginEnd="19dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="@string/duration"
-            android:layout_marginLeft="@dimen/standard_8"
-            android:id="@+id/tvDurationRoutine"
-            android:clickable="true"/>
-
+            >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/deadline"
-            android:textSize="@dimen/standard_23"
-            android:fontFamily="cursive"
-            android:textStyle="bold|italic"
-            android:layout_margin="@dimen/standard_5"/>
+            android:textSize="@dimen/standard_16"
+            android:textColor="@color/colorAccent"
+            android:textStyle="italic"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="@dimen/standard_12"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:layout_weight="1"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             >
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="@dimen/standard_5"
                 android:id="@+id/tvDeadlineDateRoutine"
-                android:padding="@dimen/standard_5"
-                android:text="Deadline Date"
+                android:text="@string/deadline_date"
                 android:clickable="true"
-                android:background="#34c7fc"
+                android:layout_margin="@dimen/standard_12"
+                android:background="@color/colorWhite"
                 android:gravity="center"
                 />
 
             <TextView
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="@dimen/standard_5"
                 android:gravity="center"
                 android:id="@+id/tvDeadlineTimeRoutine"
-                android:text="Deadline Time"
-                android:background="#34c7fc"
-                android:padding="@dimen/standard_5"
+                android:layout_margin="@dimen/standard_12"
+                android:text="@string/deadline_time"
+                android:background="@color/colorWhite"
                 android:clickable="true"
                 />
 
         </LinearLayout>
+        </RelativeLayout>
+
         <Button
             android:layout_gravity="center"
             android:id="@+id/btnEnterRoutine"

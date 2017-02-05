@@ -1,5 +1,6 @@
 package com.tech.ab.butler.algo.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString//(exclude = {"deadline","temporalAffinity","frequency","duration", "status"})
-public class Task {
+public class Task implements Serializable {
     private String name;
     private String taskId;
     private String dependentTaskId;

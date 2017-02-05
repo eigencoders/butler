@@ -14,10 +14,17 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.IncidentalTaskActivity" />
-        <activity android:name=".activities.RoutineTaskActivity" />
+        <activity android:name=".activities.IncidentalTaskActivity"
+                  android:theme="@style/Theme.AppCompat.Light.Dialog"
+                  android:label="Set Incidental Task"/>
+        <activity android:name=".activities.RoutineTaskActivity"
+            android:label="Set Routine Task"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
+        <activity android:name=".activities.TaskPageActivity"
+            android:label="Scheduled"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
         <!--
- ATTENTION: This was auto-generated to add Google Play services to your project for
+     ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <meta-data

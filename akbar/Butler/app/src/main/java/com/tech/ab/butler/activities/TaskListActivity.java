@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,8 +30,13 @@ import java.util.List;
 public class TaskListActivity extends ActionBarListActivity {
 
     FloatingActionButton fabMain, fabRoutine, fabIncidentals;
-    Intent routineIntent, incidentalIntent,settingsIntent;
+    Intent routineIntent, incidentalIntent,settingsIntent,taskPageIntent;
+    ListView lvTaskList;
+    List<Task> tasks;
     boolean isFABOpen = false;
+    float historicX = Float.NaN, historicY = Float.NaN;
+    static final int DELTA = 50;
+    enum Direction {LEFT, RIGHT;}
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,6 +52,7 @@ public class TaskListActivity extends ActionBarListActivity {
         fabMain = (FloatingActionButton) findViewById(R.id.fabMain);
         fabRoutine = (FloatingActionButton) findViewById(R.id.fabRoutine);
         fabIncidentals = (FloatingActionButton) findViewById(R.id.fabIncidentals);
+        lvTaskList = (ListView)findViewById(R.id.content_task_list);
         fabMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +83,34 @@ public class TaskListActivity extends ActionBarListActivity {
             }
         });
 
+        lvTaskList.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        historicX = event.getX();
+                        historicY = event.getY();
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        if (event.getX() - historicX < -DELTA) {
+                            Toast.makeText(TaskListActivity.this, "SwipeLeft", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        else if (event.getX() - historicX > DELTA) {
+                            Toast.makeText(TaskListActivity.this, "SwipeRight", Toast.LENGTH_SHORT).show();
+                            return true;
+                        }
+                        break;
+
+                    default:
+                        return false;
+                }
+                return false;
+            }
+        });
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -84,16 +119,16 @@ public class TaskListActivity extends ActionBarListActivity {
         List<String> taskStrList = new ArrayList<>();
         String[] taskDetailsArray = new String[]{};
         try {
-            List<Task> tasks = db.getAvailableTasks();
+            tasks = db.getAvailableTasks();
             for (Task t: tasks ) {
-                taskStrList.add(t.toString());
+                taskStrList.add(t.getName().toString());
             }
             Log.d("sizeTask",""+tasks.size());
             taskDetailsArray = taskStrList.toArray(new String[taskStrList.size()]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, taskDetailsArray);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item, taskDetailsArray);
         setListAdapter(adapter);
     }
 
@@ -125,7 +160,11 @@ public class TaskListActivity extends ActionBarListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Log.d("click", "Position click " + position);
         String item = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+        String taskID= (String)tasks.get(position).getTaskId();
+        taskPageIntent = new Intent(getApplicationContext(),TaskPageActivity.class);
+        taskPageIntent.putExtra("taskObj",tasks.get(position));
+        startActivity(taskPageIntent);
+
     }
 
     @Override

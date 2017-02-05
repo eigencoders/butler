@@ -2,6 +2,7 @@ package com.tech.ab.butler.algo.entities;
 
 import com.tech.ab.butler.algo.computeconstants.ComputeConstants;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor(suppressConstructorProperties = true)
 @NoArgsConstructor
 @Data
-public class TimePeriod {
+public class TimePeriod implements Serializable{
     private String startTimeOfTheDay;
     private String endTimeOfTheDay;
 
