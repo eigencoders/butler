@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:textColor="@color/colorBlack"
-    android:textSize="@dimen/standard_23"
+    android:textSize="@dimen/standard_12"
     android:background="@color/colorWhite"
     android:fontFamily="cursive"
     >

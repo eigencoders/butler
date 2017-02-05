@@ -12,7 +12,9 @@ import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-public abstract class ActionBarListActivity extends AppCompatActivity {
+public abstract class
+
+ActionBarListActivity extends AppCompatActivity {
 
     private final class ListOnItemClickListener implements OnItemClickListener {
 
