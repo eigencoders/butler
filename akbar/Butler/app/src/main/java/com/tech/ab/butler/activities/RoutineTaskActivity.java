@@ -66,11 +66,6 @@ public class RoutineTaskActivity extends AppCompatActivity {
         etRoutineDuration = (EditText) findViewById(R.id.tvDurationRoutine);
         btnEnterRoutine = (Button)findViewById(R.id.btnEnterRoutine);
 
-        if(etRoutineTaskName.getText().toString().isEmpty())
-        {
-            etRoutineTaskName.setError("Please fill the Task Name");
-        }
-
         placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         placeCount = placeSharedPreferences.getInt("placeCount", 0);
         if(placeCount > 0){
@@ -117,26 +112,31 @@ public class RoutineTaskActivity extends AppCompatActivity {
         btnEnterRoutine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTask.setName(etRoutineTaskName.getText().toString());
-                Long tsLong = System.currentTimeMillis()/1000;
-                String taskIDString = tsLong.toString();
-                selectedTask.setTaskId(taskIDString);
-                selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
-                selectedTask.setFrequency(freqStringToInt(routineFrequencySpinner.getItemAtPosition(routineFrequencySpinner.getSelectedItemPosition()).toString()));
-                selectedTask.setSpatialAffinity(selectedPlaces);
-                selectedTask.setStaticScore(routinePrioritySpinner.getSelectedItemId());
-                selectedTask.setStatus(Status.FUTURE);
-                selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) routineTimeAffinitySpinner.getSelectedItemId()));
-                selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
-                Toast.makeText(RoutineTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
-                ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
-                butlerSQLiteDB.insertTask(selectedTask);
-                try {
-                    Log.d("getFromDB",""+butlerSQLiteDB.getAvailableTasks().size());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if(etRoutineTaskName.getText().toString().isEmpty())
+                {
+                    etRoutineTaskName.setError("Please fill the Task Name");
+                } else {
+                    selectedTask.setName(etRoutineTaskName.getText().toString());
+                    Long tsLong = System.currentTimeMillis() / 1000;
+                    String taskIDString = tsLong.toString();
+                    selectedTask.setTaskId(taskIDString);
+                    selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
+                    selectedTask.setFrequency(freqStringToInt(routineFrequencySpinner.getItemAtPosition(routineFrequencySpinner.getSelectedItemPosition()).toString()));
+                    selectedTask.setSpatialAffinity(selectedPlaces);
+                    selectedTask.setStaticScore(routinePrioritySpinner.getSelectedItemId());
+                    selectedTask.setStatus(Status.FUTURE);
+                    selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) routineTimeAffinitySpinner.getSelectedItemId()));
+                    selectedTask.setDeadline(new Date(sYear, sMonth, sDay, sHour, sMin, 0));
+                    Toast.makeText(RoutineTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
+                    ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
+                    butlerSQLiteDB.insertTask(selectedTask);
+                    try {
+                        Log.d("getFromDB", "" + butlerSQLiteDB.getAvailableTasks().size());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(getApplicationContext(), TaskListActivity.class));
                 }
-                startActivity(new Intent(getApplicationContext(), TaskListActivity.class));
             }
         });
     }

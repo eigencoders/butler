@@ -64,10 +64,6 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         tvIncidentalDuration = (TextView) findViewById(R.id.tvDurationIncidental);
         btnEnterIncidental = (Button)findViewById(R.id.btnEnterIncidental);
 
-        if(etIncidentalTaskName.getText().toString().isEmpty())
-        {
-            etIncidentalTaskName.setError("Please fill the Task Name");
-        }
 
         placeSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         placeCount = placeSharedPreferences.getInt("placeCount", 0);
@@ -116,26 +112,31 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         btnEnterIncidental.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedTask.setName(etIncidentalTaskName.getText().toString());
-                Long tsLong = System.currentTimeMillis()/1000;
-                String taskID = tsLong.toString();
-                selectedTask.setTaskId(taskID);
-                selectedTask.setFrequency(0);
-                selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
-                selectedTask.setSpatialAffinity(selectedPlaces);
-                selectedTask.setStaticScore(incidentalPrioritySpinner.getSelectedItemId());
-                selectedTask.setStatus(Status.FUTURE);
-                selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) incidentalTimeAffinitySpinner.getSelectedItemId()));
-                selectedTask.setDeadline(new Date(sYear,sMonth,sDay,sHour,sMin,0));
-                Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
-                ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
-                butlerSQLiteDB.insertTask(selectedTask);
-                try {
-                    Log.d("getFromDB",""+butlerSQLiteDB.getAvailableTasks().size());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if(etIncidentalTaskName.getText().toString().isEmpty())
+                {
+                    etIncidentalTaskName.setError("Please fill the Task Name");
+                } else {
+                    selectedTask.setName(etIncidentalTaskName.getText().toString());
+                    Long tsLong = System.currentTimeMillis() / 1000;
+                    String taskID = tsLong.toString();
+                    selectedTask.setTaskId(taskID);
+                    selectedTask.setFrequency(0);
+                    selectedTask.setDependentTaskId("dtid"); //TODO We need to have a tasks drop down, or a task Selecter screen
+                    selectedTask.setSpatialAffinity(selectedPlaces);
+                    selectedTask.setStaticScore(incidentalPrioritySpinner.getSelectedItemId());
+                    selectedTask.setStatus(Status.FUTURE);
+                    selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) incidentalTimeAffinitySpinner.getSelectedItemId()));
+                    selectedTask.setDeadline(new Date(sYear, sMonth, sDay, sHour, sMin, 0));
+                    Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
+                    ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
+                    butlerSQLiteDB.insertTask(selectedTask);
+                    try {
+                        Log.d("getFromDB", "" + butlerSQLiteDB.getAvailableTasks().size());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    startActivity(new Intent(getApplicationContext(), TaskListActivity.class));
                 }
-                startActivity(new Intent(getApplicationContext(), TaskListActivity.class));
 
             }
         });
