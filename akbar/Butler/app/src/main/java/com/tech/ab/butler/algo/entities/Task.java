@@ -28,6 +28,7 @@ public class Task implements Serializable {
     private Date deadline;
     private TimePeriod temporalAffinity;
     private String spatialAffinity;
+    private boolean isRoutine;
 
 
     @Override

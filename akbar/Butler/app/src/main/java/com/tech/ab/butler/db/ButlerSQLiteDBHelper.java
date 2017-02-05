@@ -35,7 +35,8 @@ public class ButlerSQLiteDBHelper extends SQLiteOpenHelper {
                 "  `deadline` DATETIME DEFAULT '2066-01-01 00:00:00'," +
                 "  `startTimeOfTheDay` TIME DEFAULT '00:00:00'," +
                 "  `endTimeOfTheDay` Time DEFAULT '23:59:59'," +
-                "  `places` varchar(255)  NOT NULL DEFAULT 'OTHER') ";
+                "  `places` varchar(255)  NOT NULL DEFAULT 'OTHER' ," +
+                "  `isRoutine` INTEGER DEFAULT 0) ";
         db.execSQL(createTableSyntax);
     }
 

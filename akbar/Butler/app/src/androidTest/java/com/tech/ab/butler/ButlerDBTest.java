@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -30,10 +31,11 @@ public class ButlerDBTest {
         // Context of the app under test.
         Context mockContext = InstrumentationRegistry.getTargetContext();
         ButlerSQLiteDB db = new ButlerSQLiteDB(mockContext);
-        Task task = new Task("name", "tid", "dtid", (long)100, Status.FUTURE, (long) 100, 1, new Date(System.currentTimeMillis()),new TimePeriod("00:00:00","12:00:00"),"OFFICE");
+        Task task = new Task("name", "tid", "dtid", (long)100, Status.FUTURE, (long) 100, 1, new Date(System.currentTimeMillis()),new TimePeriod("00:00:00","03:00:00"),"OFFICE",false);
         db.insertTask(task);
         List<Task> t = db.getAvailableTasks();
         assertEquals(t.size(),1);
+        assertFalse(t.get(0).isRoutine());
         assertTrue(t.get(0).getName().equals("name"));
         assertTrue(t.get(0).getTaskId().equals("tid"));
         assertTrue(t.get(0).getTemporalAffinity().getEndTimeOfTheDay().equals("12:00:00"));

@@ -127,6 +127,7 @@ public class IncidentalTaskActivity extends AppCompatActivity {
                     selectedTask.setStatus(Status.FUTURE);
                     selectedTask.setTemporalAffinity(getTimeAffinityFromId((int) incidentalTimeAffinitySpinner.getSelectedItemId()));
                     selectedTask.setDeadline(new Date(sYear, sMonth, sDay, sHour, sMin, 0));
+                    selectedTask.setRoutine(false);
                     Toast.makeText(IncidentalTaskActivity.this, "Selected Values : " + selectedTask.toString(), Toast.LENGTH_SHORT).show();
                     ButlerSQLiteDB butlerSQLiteDB = new ButlerSQLiteDB(getApplicationContext());
                     butlerSQLiteDB.insertTask(selectedTask);
@@ -147,7 +148,7 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         DialogFragment newFragment = new DatePickerDialogFragment( new DatePickerDialog.OnDateSetListener(){
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                sYear=year;
+                sYear=year-1900;
                 sDay=dayOfMonth;
                 sMonth=month;
                 String deadlineDate=  String.format("%d/%d/%d",dayOfMonth,month+1,year);

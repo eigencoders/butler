@@ -32,14 +32,14 @@
     <string name="yourName">Your Name</string>
     <string name="clearPlaces">Clear All</string>
     <string name="duration">Duration</string>
-    <string name="slot1">Midnight to 3 A.M.</string>
-    <string name="slot2">3 A.M. to 6 A.M.</string>
-    <string name="slot3">6 A.M. to 9 A.M.</string>
-    <string name="slot4">9 A.M. to 12 P.M.</string>
-    <string name="slot5">12 P.M. to 3 P.M.</string>
-    <string name="slot6">3 P.M. to 6 P.M.</string>
-    <string name="slot7">6 P.M. to 9 P.M.</string>
-    <string name="slot8">9 P.M. to Midnight</string>
+    <string name="slot0">Midnight to 3 A.M.</string>
+    <string name="slot1">3 A.M. to 6 A.M.</string>
+    <string name="slot2">6 A.M. to 9 A.M.</string>
+    <string name="slot3">9 A.M. to 12 P.M.</string>
+    <string name="slot4">12 P.M. to 3 P.M.</string>
+    <string name="slot5">3 P.M. to 6 P.M.</string>
+    <string name="slot6">6 P.M. to 9 P.M.</string>
+    <string name="slot7">9 P.M. to Midnight</string>
 
     <string-array name="frequencyList">
         <item>@string/daily</item>
@@ -62,6 +62,7 @@
     </string-array>
 
     <string-array name="timeAffinityList">
+        <item>@string/slot0</item>
         <item>@string/slot1</item>
         <item>@string/slot2</item>
         <item>@string/slot3</item>
@@ -69,7 +70,6 @@
         <item>@string/slot5</item>
         <item>@string/slot6</item>
         <item>@string/slot7</item>
-        <item>@string/slot8</item>
     </string-array>
 
     <string name="title_activity_where_are_you">Butler</string>

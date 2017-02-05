@@ -33,4 +33,7 @@ public class TimePeriod implements Serializable{
         long ct = currentTime.getHours()*10000 + currentTime.getMinutes()*100 + currentTime.getSeconds();
         return st<=ct && ct<et;
     }
+    public String getFancyString(){
+        return startTimeOfTheDay+" - "+endTimeOfTheDay;
+    }
 }

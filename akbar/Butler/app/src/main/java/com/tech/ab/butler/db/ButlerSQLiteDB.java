@@ -38,6 +38,7 @@ public class ButlerSQLiteDB {
     private static final String START_TOD = "startTimeOfTheDay";
     private static final String END_TOD = "endTimeOfTheDay";
     private static final String PLACES = "places";
+    private static final String IS_ROUTINE = "isRoutine";
 
 
     public ButlerSQLiteDB(Context context) {
@@ -62,7 +63,8 @@ public class ButlerSQLiteDB {
                         r.getInt(6),
                         ComputeConstants.format.parse(r.getString(7)),
                         timePeriod,
-                        r.getString(10));
+                        r.getString(10),
+                        r.getShort(11)!=0);
                 allTasks.add(t);
             } while (r.moveToNext());
         }
@@ -83,6 +85,7 @@ public class ButlerSQLiteDB {
         row.put(START_TOD, t.getTemporalAffinity().getStartTimeOfTheDay());
         row.put(END_TOD, t.getTemporalAffinity().getEndTimeOfTheDay());
         row.put(PLACES, t.getSpatialAffinity());
+        row.put(IS_ROUTINE,t.isRoutine());
 
         database.insert(TABLE_NAME, null, row);
     }
@@ -108,7 +111,8 @@ public class ButlerSQLiteDB {
                 r.getInt(6),
                 ComputeConstants.format.parse(r.getString(7)),
                 timePeriod,
-                r.getString(10));
+                r.getString(10),
+                r.getShort(11)!=0);
         r.close();
         return t;
     }
