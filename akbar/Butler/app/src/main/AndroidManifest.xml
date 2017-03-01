@@ -14,6 +14,9 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.TaskEditActivity"
+            android:label="Scheduled"
+            android:theme="@style/Theme.AppCompat.Light.Dialog"/>
         <activity android:name=".activities.IncidentalTaskActivity"
                   android:theme="@style/Theme.AppCompat.Light.Dialog"
                   android:label="Set Incidental Task"/>

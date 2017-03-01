@@ -77,7 +77,7 @@ public class IncidentalTaskActivity extends AppCompatActivity {
             }
         }
 
-        incidentalPlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place", new MultiSelectSpinner.MultiSelectSpinnerListener() {
+        incidentalPlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place",null, new MultiSelectSpinner.MultiSelectSpinnerListener() {
             @Override
             public void onItemsSelected(boolean[] selected) {
                 selectedPlaces ="";
@@ -94,6 +94,7 @@ public class IncidentalTaskActivity extends AppCompatActivity {
         tvIncidentalDuration.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 showDurationPickerDialog(v);
 

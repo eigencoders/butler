@@ -1,3 +1,4 @@
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/eigencoders/butler/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -35,3 +36,15 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+# butler
+
+INSTALLING LOMBOK ON ANDROID STUDIO
+Go to File > Settings > Plugins
+Click on Browse repositories...
+Search for Lombok Plugin
+Click on Install plugin
+Restart Android Studio
+
+ENABLING ANNOTATION PROCESSOR IN ANDROID STUDIO
+http://stackoverflow.com/questions/38642712/enable-annotation-processors-option-in-android-studio-2-2
+

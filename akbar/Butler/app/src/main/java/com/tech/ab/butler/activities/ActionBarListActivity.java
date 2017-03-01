@@ -11,6 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public abstract class
 
@@ -27,6 +28,17 @@ ActionBarListActivity extends AppCompatActivity {
             // your_new_Intent.class);
             // intent.putExtra("list_view_value", str);
             // startActivity(intent);
+        }
+    }
+
+
+    private final class ListOnItemLongClickListener implements AdapterView.OnItemLongClickListener {
+
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Toast.makeText(getBaseContext(), "Long Click",
+                    Toast.LENGTH_LONG).show();
+            onListItemLongClick((ListView) adapterView, view, position, id);
+            return true;
         }
     }
 
@@ -47,6 +59,7 @@ ActionBarListActivity extends AppCompatActivity {
         }
 
         mListView.setOnItemClickListener(new ListOnItemClickListener());
+        mListView.setOnItemLongClickListener(new ListOnItemLongClickListener());
     }
 
     protected abstract int getListViewId();
@@ -56,6 +69,10 @@ ActionBarListActivity extends AppCompatActivity {
     }
 
     protected void onListItemClick(ListView lv, View v, int position, long id) {
+        // No default functionality. To override
+    }
+
+    protected void onListItemLongClick(ListView lv, View v, int position, long id) {
         // No default functionality. To override
     }
 
