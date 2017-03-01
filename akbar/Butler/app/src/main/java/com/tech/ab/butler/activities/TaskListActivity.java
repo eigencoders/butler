@@ -168,6 +168,18 @@ public class TaskListActivity extends ActionBarListActivity {
     }
 
     @Override
+    protected void onListItemLongClick(ListView l, View v, int position, long id) {
+        Log.d("click", "Position long click " + position);
+        String item = (String) getListAdapter().getItem(position);
+        String taskID= (String)tasks.get(position).getTaskId();
+        taskPageIntent = new Intent(getApplicationContext(),TaskEditActivity.class);
+        taskPageIntent.putExtra("taskObj",tasks.get(position));
+        taskPageIntent.putExtra("taskID",taskID);
+        startActivity(taskPageIntent);
+
+    }
+
+    @Override
     protected int getListViewId() {
         return R.id.content_task_list;
     }

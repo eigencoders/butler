@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -64,7 +65,7 @@ public class MultiSelectSpinner extends Spinner implements
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
-                new String[] { spinnerText });
+                new String[]{spinnerText});
         setAdapter(adapter);
         listener.onItemsSelected(selected);
     }
@@ -87,20 +88,34 @@ public class MultiSelectSpinner extends Spinner implements
         return true;
     }
 
-    public void setItems(List<String> items, String allText,
+    public void setItems(List<String> items, String allText, String spatialAffinity,
                          MultiSelectSpinnerListener listener) {
         this.items = items;
         this.defaultText = allText;
         this.listener = listener;
 
-        // all selected by default
         selected = new boolean[items.size()];
-        for (int i = 0; i < selected.length; i++)
-            selected[i] = false;
+        if (spatialAffinity != null) {
+            String[] selectedItems = spatialAffinity.trim().split(",");
+
+            for (int i = 0; i < selected.length; i++) {
+                for (int selectedItemsCounter = 0; selectedItemsCounter < selectedItems.length; selectedItemsCounter++) {
+                    if (selectedItems[selectedItemsCounter].toLowerCase().trim().equals(items.get(i).toLowerCase().trim()))
+                        selected[i] = true;
+                }
+            }
+        }
+
+        // all not selected by default
+        else {
+
+            for (int i = 0; i < selected.length; i++)
+                selected[i] = false;
+        }
 
         // all text on the spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item, new String[] { allText });
+                android.R.layout.simple_spinner_dropdown_item, new String[]{allText});
         setAdapter(adapter);
     }
 

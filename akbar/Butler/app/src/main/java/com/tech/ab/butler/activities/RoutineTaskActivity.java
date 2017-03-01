@@ -80,7 +80,7 @@ public class RoutineTaskActivity extends AppCompatActivity {
         }
 
 
-        routinePlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place", new MultiSelectSpinner.MultiSelectSpinnerListener() {
+        routinePlaceMultiSpinner.setItems(placeDynamicList, "Choose a Place", null,new MultiSelectSpinner.MultiSelectSpinnerListener() {
             @Override
             public void onItemsSelected(boolean[] selected) {
                 selectedPlaces ="";

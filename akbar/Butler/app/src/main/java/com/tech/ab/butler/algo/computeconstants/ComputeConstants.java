@@ -5,6 +5,8 @@ import com.tech.ab.butler.algo.entities.TimePeriod;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import static android.R.attr.id;
+
 /**
  * Created by shreenath on 13/1/17.
  */
@@ -60,6 +62,29 @@ public class ComputeConstants {
                 return new TimePeriod("2100","0000");
             default:
                 return new TimePeriod("0000","0300");
+        }
+    }
+
+    public static int getTimeAffinityFromId(TimePeriod timePeriod) {
+        switch (timePeriod.getStartTimeOfTheDay()) {
+            case "0000":
+                return 0;
+            case "0300":
+                return 1;
+            case "0600":
+                return 2;
+            case "0900":
+                return 3;
+            case "1200":
+                return 4;
+            case "1500":
+                return 5;
+            case "1800":
+                return 6;
+            case "2100":
+                return 7;
+            default:
+                return 0;
         }
     }
 }
