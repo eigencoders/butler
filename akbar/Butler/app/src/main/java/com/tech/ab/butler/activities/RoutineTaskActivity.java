@@ -85,8 +85,10 @@ public class RoutineTaskActivity extends AppCompatActivity {
                     }
                 }
                 Toast.makeText(RoutineTaskActivity.this, selectedPlaces, Toast.LENGTH_LONG).show();
+
             }
         });
+
 
         etRoutineDuration.setOnClickListener(new View.OnClickListener() {
             @Override

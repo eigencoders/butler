@@ -20,6 +20,7 @@ public class MultiSelectSpinner extends Spinner implements
     private boolean[] selected;
     private String defaultText;
     private MultiSelectSpinnerListener listener;
+    private int countSelected=0;
 
     public MultiSelectSpinner(Context context) {
         super(context);
@@ -45,22 +46,20 @@ public class MultiSelectSpinner extends Spinner implements
     public void onCancel(DialogInterface dialog) {
         // refresh text on spinner
         StringBuffer spinnerBuffer = new StringBuffer();
-        boolean someUnselected = false;
+        boolean noneSelected = false;
         for (int i = 0; i < items.size(); i++) {
-            if (selected[i] == true) {
-                spinnerBuffer.append(items.get(i));
-                spinnerBuffer.append(", ");
-            } else {
-                someUnselected = true;
-            }
+            if (selected[i] == true)
+                countSelected++;
+
         }
+
         String spinnerText;
-        if (someUnselected) {
+        if (countSelected==0) {
+            spinnerText = defaultText;
+        } else {
             spinnerText = spinnerBuffer.toString();
             if (spinnerText.length() > 2)
                 spinnerText = spinnerText.substring(0, spinnerText.length() - 2);
-        } else {
-            spinnerText = defaultText;
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                 android.R.layout.simple_spinner_dropdown_item,
