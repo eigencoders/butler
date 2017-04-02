@@ -9,7 +9,6 @@
         android:layout_margin="@dimen/standard_12"
         android:text="@string/addPlace"
         android:textSize="@dimen/standard_16"
-        android:fontFamily="cursive"
         android:textStyle="bold|italic"/>
 
     <Spinner

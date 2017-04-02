@@ -15,9 +15,8 @@
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="@string/compute_content"
-        android:fontFamily="cursive"
         android:textColor="#33b5e5"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:textStyle="bold" />
 
     <!-- This FrameLayout insets its children based on system windows using

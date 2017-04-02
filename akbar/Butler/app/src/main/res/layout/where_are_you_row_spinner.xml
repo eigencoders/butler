@@ -6,7 +6,6 @@
     android:textColor="@color/colorBlack"
     android:textSize="@dimen/standard_12"
     android:background="@color/colorWhite"
-    android:fontFamily="cursive"
     >
 
 </TextView>
